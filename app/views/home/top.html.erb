@@ -1,0 +1,7 @@
+<% if user_signed_in? %>
+  ログインしているルートパス
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: 'btn btn-default' %>
+<% else %>
+  ログインしてないルートパス
+  <%= link_to "ログイン", new_user_session_path,class: 'btn btn-default' %>
+<% end %>
