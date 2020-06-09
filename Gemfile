@@ -41,6 +41,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'bullet'
+  gem 'rubocop-airbnb'
 end
 
 group :test do
@@ -57,6 +58,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'rails_admin', '~> 2.0.0.beta'
 gem 'cancancan'
-gem 'rubocop'
-gem 'rubocop-rails'
 
