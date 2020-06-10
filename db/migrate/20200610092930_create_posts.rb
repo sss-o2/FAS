@@ -6,6 +6,7 @@ class CreatePosts < ActiveRecord::Migration[6.0]
       t.string :image_id
       t.integer :user_id, null: false
       t.boolean :status,default: true, null: false
+      t.date :deadline,null: false
       t.timestamps
     end
   end
