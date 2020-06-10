@@ -61,4 +61,7 @@ gem 'rails_admin', '~> 2.0.0.beta'
 gem 'cancancan'
 gem 'rubocop'
 gem 'rubocop-rails'
-
+gem 'bootstrap', '~>4.0.0'
+gem 'jquery-rails'
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"
