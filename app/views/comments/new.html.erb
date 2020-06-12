@@ -1,0 +1,28 @@
+<h1>返信</h1>
+<div class="d-flex align-items-center">
+  <div class="ml-auto posts_button">
+  </div>
+  <div>
+  ユーザーアイコン 
+    <%= @post.user.name %>
+    <br/>
+    <%= @post.body %>
+  </div>
+
+</div>
+<%= form_for [@post,@comment] do |f| %>
+    <div class="form-group">
+        <%= f.label :body, '投稿内容' %>
+        <br/>
+        ユーザーアイコン<br/>
+        <%= current_user.name %><br/>
+        <%= f.text_area :body, class: 'form-control', rows:10 %>
+        <small id="content-tip" class="form-text text-muted">
+            投稿内容を入力してください。 
+        </small>
+    </div>
+    <%= f.submit '返信', class: 'btn btn-info btn-block' %>
+    <small id="submit-tip" class="form-text text-muted">
+        投稿する前に投稿内容を見直してください!
+    </small>
+<% end %>

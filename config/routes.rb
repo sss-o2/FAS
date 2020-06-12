@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root to: 'home#top'
   get 'home/about'
 
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
 
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',

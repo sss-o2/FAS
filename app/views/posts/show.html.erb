@@ -13,8 +13,22 @@
   </div>
   <div class="card-body">
       <p class="card-text"><%= @post.body %></p>
+
+      <% unless current_user.id==@post.user_id %>
+          <%= link_to "返信する", new_post_comment_path(@post.id), class: 'btn btn-outline-info' %>
+      <% end %>
   </div>
   <div class="card-footer">
     <p class="text-right font-weight-bold mr-10"><%= @post.user.name %></p>
   </div>
 </div>
+
+<% @comments.each do |comment| %>
+  ユーザーアイコン
+  <%= comment.user.name %>
+  <%= comment.created_at %>
+  <%= comment.updated_at %>
+  <br/>
+  <%= comment.body %>
+  <br/>
+<% end %>
