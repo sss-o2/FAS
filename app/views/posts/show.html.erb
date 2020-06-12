@@ -30,5 +30,8 @@
   <%= comment.updated_at %>
   <br/>
   <%= comment.body %>
+  <% if current_user.id==comment.user_id %>
+    <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
+  <% end %>
   <br/>
 <% end %>

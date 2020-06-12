@@ -24,14 +24,20 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
+    @post = Post.find(params[:post_id])
   end
 
   def update
     comment = Comment.find(params[:id])
-    comment.update(comment_params)
+    post = Post.find(params[:post_id])
+    if comment.update(comment_params)
+      # リダイレクト処理
+      redirect_to post_path(post),notice: '編集しました'
+    else
+      render :new
+    end
 
-    # リダイレクト処理
-    redirect_to comment,notice: '編集しました'
+    
   end
 
   def show
