@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.where(status: true)
+    @post_pasts = Post.where(status: false)
   end
 
   def new
@@ -25,10 +26,11 @@ class PostsController < ApplicationController
 
   def update
     post = Post.find(params[:id])
-    post.update(post_params)
-
-    # リダイレクト処理
-    redirect_to post,notice: '編集しました'
+    if post.update(post_params)
+       redirect_to post,notice: '編集しました'
+    else
+      render :new
+    end
 end
 
   def show

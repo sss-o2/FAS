@@ -30,4 +30,21 @@
         </tr>
     <% end %>
   </tbody>
+
+    <tbody>
+    <% @post_pasts.each do |post_past| %>
+    <%=link_to post_past.title, "/posts/#{post_past.id}" %>
+        <tr>
+          <%= link_to post_path(post_past.id) do %>
+          <th>募集終了<%= post_past.id %></th>
+          <td><%= post_past.title %></td>
+          <td><%= post_past.user.name %></td>
+          <td><%= post_past.created_at %></td>
+          <td><%= post_past.updated_at %></td>
+          <% end %>
+        </tr>
+    <% end %>
+  </tbody>
+
+
 </table>
