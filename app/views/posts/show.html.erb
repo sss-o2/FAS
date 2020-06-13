@@ -13,13 +13,13 @@
   </div>
   <div class="card-body">
       <p class="card-text"><%= @post.body %></p>
-    
-    <% if @post.post_images.present? %>
-      <% @post.post_images.each do |image| %>
-        <%= attachment_image_tag image, :image, :fill, 200, 200 %>
-      <% end %>
-    <% end %>
 
+      <% if @post.post_images.present? %>
+        <% @post.post_images.each do |image| %>
+          <%= attachment_image_tag image, :image, :fill, 200, 200 %>
+        <% end %>
+      <% end %>
+      
       <% unless current_user.id==@post.user_id %>
           <%= link_to "返信する", new_post_comment_path(@post.id), class: 'btn btn-outline-info' %>
       <% end %>
