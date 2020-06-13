@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
   def new
     @comment = Comment.new
     @post = Post.find(params[:post_id])
+    @comment.post_images.build
     #binding.pry
   end
 
@@ -51,6 +52,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body,:image) 
+    params.require(:comment).permit(:body,post_images_images: []) 
   end
 end

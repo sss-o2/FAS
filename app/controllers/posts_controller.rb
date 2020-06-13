@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.post_images.build
     #binding.pry
   end
 
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
     else
       render :new
     end
-end
+  end
 
   def show
     @post = Post.find(params[:id])
@@ -45,7 +46,7 @@ end
   private
 
   def post_params
-    params.require(:post).permit(:title, :body,:image,:status,:deadline,:tag_list) 
+    params.require(:post).permit(:title, :body,:status,:deadline,:tag_list,post_images_images: []) 
     #tag_list を追加
   end
 end

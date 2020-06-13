@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   validates :user, presence: true
 
   belongs_to :user
-  has_many :post_images, dependent: :destroy
+  has_many :post_images, dependent: :destroy, foreign_key:'post_id'
   has_many :comments, dependent: :destroy
+  accepts_attachments_for :post_images, attachment: :image
 end
