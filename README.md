@@ -1,24 +1,28 @@
-# README
+# FAS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+**服のマッチングアドバイス用SNSサイト**。<br>
+自分の欲しい服の要件を投稿して、それを見た人が返信で商品のサイトのリンクを貼る<br>
+基本的には、ユーザーが要望を投稿し、ショップがうちのサイトのこの商品はどうですか、と商品リンクを貼る感じ。<br>
+例）*「この画像に合うズボンが欲しいです」「うちのこの商品はどうですか（URL）」*
 
-Things you may want to cover:
+### サイトテーマ
+家にいながら、要件に合った服をプロ（またはユーザー）に選んでもらえるサイト
 
-* Ruby version
+### テーマを選んだ理由
+- 服を店員さんに選んでもらいたいが、おしゃれなお店に入りづらい
+- 自粛でお店が閉まっていて、店員さんにアドバイスがもらえない
 
-* System dependencies
+そんな時ネットでアドバイスから購入までできたらいいと思いました。
 
-* Configuration
+### ターゲットユーザ
+全般（主な利用シーンに該当する人）
 
-* Database creation
+### 主な利用シーン
+洋服選びに困っているが、直接店舗に行けない、行きづらい
 
-* Database initialization
+## 設計書
+https://docs.google.com/spreadsheets/d/1Qi3vEOI7vizS_H-cQCQ3zfjK9f1iqDpvsjfW3w7M2s0/edit?usp=sharing
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### 機能一覧
+https://docs.google.com/spreadsheets/d/1ofhM5Ej0iVO3qqpLx2xMshZ5OiNPYQM8KfqVKo925uE/edit?usp=sharing
