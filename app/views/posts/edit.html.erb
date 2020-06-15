@@ -19,6 +19,17 @@
             投稿内容を入力してください。 
         </small>
     </div>
+    <div class="form-group row">
+    <% if @post.post_images.present? %>
+        <% @post.post_images.each do |image| %>
+          <%= attachment_image_tag image, :image, :fill, 200, 200 %>
+        <% end %>
+      <% end %>
+        <%= f.attachment_field :post_images_images, multiple: true %>
+        <small id="image-tip" class="form-text text-muted">
+        ※複数画像選択可能
+        </small>
+    </div>
     <div class="form-group">
         <%= f.label :deadline, 'コメント募集期間' %>
         <%= f.datetime_select :deadline, {}, class: 'form-control' %>
