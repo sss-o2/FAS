@@ -14,7 +14,7 @@ test:
   <<: *default
   database: app_name_test
 
-  production:
+production:
   <<: *default
   database: <%= ENV['DB_DATABASE'] %>
   adapter: mysql2
