@@ -14,13 +14,11 @@ test:
   <<: *default
   database: app_name_test
 
-  production:
-  <<: *default
+production:
   database: <%= ENV['DB_DATABASE'] %>
-  adapter: mysql2
-  encoding: utf8mb4
-  charset: utf8mb4gi
-  collation: utf8mb4_general_ci
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: <%= ENV['DB_HOST'] %>
   username: <%= ENV['DB_USERNAME'] %>
   password: <%= ENV['DB_PASSWORD'] %>
