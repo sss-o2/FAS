@@ -1,7 +1,9 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.where(status: true)
-    @post_pasts = Post.where(status: false)
+    @posts = Post.all
+    if params[:tag_name]
+      @posts = Post.tagged_with("#{params[:tag_name]}")
+    end
   end
 
   def new

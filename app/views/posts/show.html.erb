@@ -30,14 +30,29 @@
 </div>
 
 <% @comments.each do |comment| %>
-  ユーザーアイコン
-  <%= comment.user.name %>
-  <%= comment.created_at %>
-  <%= comment.updated_at %>
-  <br/>
-  <%= comment.body %>
-  <% if current_user.id==comment.user_id %>
-    <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
-  <% end %>
-  <br/>
+<div class="card">
+ <div class="card-header bg-info text-white">
+ ユーザーアイコン
+      <%= comment.user.name %>
+      <%= comment.created_at %>
+      <%= comment.updated_at %>
+      <br/>
+ </div>
+  <div class="card-body">
+      <p class="card-text">
+       <%= comment.body %>
+      </p>
+
+      <% if comment.post_images.present? %>
+        <% comment.post_images.each do |image| %>
+          <%= attachment_image_tag image, :image, :fill, 200, 200 %>
+        <% end %>
+      <% end %>
+      
+      <% if current_user.id==comment.user_id %>
+        <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
+      <% end %>
+      <br/>
+  </div>
+</div>
 <% end %>

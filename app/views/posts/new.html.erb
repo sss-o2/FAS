@@ -20,7 +20,23 @@
             投稿内容を入力してください。 
         </small>
     </div>
+
+    <div class="form-group">
+        <%= f.label :tag_list, 'カテゴリ' %>
+        <%= f.text_field :tag_list,value: @post.tag_list.join(','), class: 'form-control' %>
+        <small id="content-tip" class="form-text text-muted">
+            カテゴリ名をコンマで区切って入力してください。（例：Tシャツ,色）
+        </small>
+    </div>
+
+
     <div class="form-group row">
+        <% if @post.post_images.present? %>
+            <% @post.post_images.each do |image| %>
+            <%= attachment_image_tag image, :image, :fill, 200, 200 %>
+            <% end %>
+        <% end %>
+        <br/>
         <%= f.attachment_field :post_images_images, multiple: true %>
         <small id="image-tip" class="form-text text-muted">
         ※複数画像選択可能
