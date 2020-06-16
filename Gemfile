@@ -31,7 +31,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'rspec-rails', '3.1.0'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'pg', '>= 0.18', '< 2.0'
 end
 
 group :development do
@@ -69,7 +68,7 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick", github: 'refile/refile-mini_magick'
 gem 'acts-as-taggable-on', '~> 6.0'
 gem 'rake', '< 11.0'
-
+gem 'pg', '>= 0.18', '< 2.0'
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
