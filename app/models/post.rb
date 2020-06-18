@@ -10,4 +10,13 @@ class Post < ApplicationRecord
   has_many :post_images, dependent: :destroy, foreign_key:'post_id'
   has_many :comments, dependent: :destroy
   accepts_attachments_for :post_images, attachment: :image
+
+  def self.search(search)
+    if search
+      Post.where(['title LIKE ?', "%#{search}%"])
+    else
+      Post.all
+    end
+  end
+
 end

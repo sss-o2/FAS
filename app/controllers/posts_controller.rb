@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    #@posts = Post.all
+    @posts = Post.search(params[:search])
     if params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}")
     end
@@ -43,6 +44,10 @@ class PostsController < ApplicationController
 
   def destroy
     # 不要な気がする。statusで削除するやん
+  end
+
+  def search
+    @posts = Post.search(params[:search])
   end
 
   private
