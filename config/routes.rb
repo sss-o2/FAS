@@ -17,6 +17,11 @@ Rails.application.routes.draw do
     get "signup", :to => "users/registrations#new"
     get "login", :to => "users/sessions#new"
     get "logout", :to => "users/sessions#destroy"
+    resource :profile,only:[:show,:edit,:update]
+  end
+
+  namespace :user do
+    resources :profile,only:[:show,:edit,:update]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
