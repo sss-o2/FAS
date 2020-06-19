@@ -11,6 +11,8 @@
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
+    <%= check_box_tag :status, checked = true,value=false %><!-- checkedでチェックがあった場合trueが:statusに送られる。value=falseで初期値チェックなし -->
+    <%= label_tag :status, "募集終了も含める" %>
   </p>
 <% end %>
 

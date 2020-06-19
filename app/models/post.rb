@@ -15,7 +15,7 @@ class Post < ApplicationRecord
     if search
       Post.where(['title LIKE ?', "%#{search}%"])
     else
-      Post.all
+      Post.where(status: true)
     end
   end
 
