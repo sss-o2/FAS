@@ -11,11 +11,23 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   accepts_attachments_for :post_images, attachment: :image
 
-  def self.search(search)
+  def self.search(search,status)
     if search
-      Post.where(['title LIKE ?', "%#{search}%"])
+      if status
+        #キーワード入っていてチェックボックス入ってる時（false含め全件取得）
+       Post.where(['title LIKE ?', "%#{search}%"])
+      else
+        #キーワード入っていてチェックボックスチェックない時、trueのみ表示（募集中のみ表示）
+       Post.where(['title LIKE ?', "%#{search}%"]).where(status: true)
+      end
     else
-      Post.where(status: true)
+      if status
+        #キーワードなくてチェックある時、全件取得
+       Post.all
+      else
+        #キーワードなくてチェックない時、trueのみ取得（募集中のみ表示）
+       Post.where(status: true)
+      end
     end
   end
 

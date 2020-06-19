@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     #@posts = Post.all
-    @posts = Post.search(params[:search])
+    @posts = Post.search(params[:search],params[:status])
     if params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}")
     end
