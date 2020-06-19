@@ -1,4 +1,4 @@
-User.create(email: 'admin@test.com', name:'admin',password: 'password')
+User.create(email: 'admin@test.com', name:'admin',password: 'password',admin: true)
 User.create(email: 'satou@test.com', name:'satou',password: 'password')
 User.create(email: 'suzuki@test.com',name:'suzuki', password: 'password')
 User.create(email: 'tanaka@test.com',name:'tanaka', password: 'password')
