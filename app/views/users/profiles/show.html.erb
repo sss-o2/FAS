@@ -1,1 +1,41 @@
-あああ
+<div class="row">
+  <aside class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @user.name %></h3>
+      </div>
+      <div class="panel-body al-c">
+          <% if @profile.icon_image.present? %>
+            <%= attachment_image_tag @profile, :icon_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+          <% else %>
+            <!-- 下記、本当は不要。後で直す -->
+            <%= attachment_image_tag @profile, :icon_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
+          <% end %>
+      </div>
+    </div>
+  </aside>
+  <div class="col-md-8">
+  <p><span class="orange b"><%= @user.name %></span>
+ 
+  <p class="orange b">自己紹介</p>
+  <% if @profile.introduce? %>
+    <p><%= @profile.introduce %></p>
+  <% else %>
+    <p>未設定</p>
+  <% end %>
+
+  <p class="orange b">HP</p>
+  <% if @profile.hp_url? %>
+    <p><%= @profile.hp_url %></p>
+  <% else %>
+    <p>未設定</p>
+  <% end %>
+
+  <p class="orange b">住所</p>
+  <% if @profile.address? %>
+    <p><%= @profile.address %></p>
+  <% else %>
+    <p>未設定</p>
+  <% end %>
+  </div>
+</div>
