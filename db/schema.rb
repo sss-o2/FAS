@@ -44,13 +44,14 @@ ActiveRecord::Schema.define(version: 2020_06_19_053702) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.text "introduce"
     t.string "hp_url"
     t.string "address"
     t.integer "icon_image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -95,5 +96,6 @@ ActiveRecord::Schema.define(version: 2020_06_19_053702) do
   end
 
   add_foreign_key "post_images", "posts"
+  add_foreign_key "profiles", "users"
   add_foreign_key "taggings", "tags"
 end
