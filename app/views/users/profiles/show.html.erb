@@ -1,3 +1,13 @@
+<div class="d-flex align-items-center">
+    <h1>プロフィール</h1>
+    <div class="ml-auto posts_button">
+        <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
+        <% if @user.id=current_user.id? %>
+         <%= link_to "編集", users_edit_profile_path(current_user.id), class: 'btn btn-outline-info' %>
+        <% end %>
+    </div>
+</div>
+
 <div class="row">
   <aside class="col-md-4">
     <div class="panel panel-default">
@@ -5,12 +15,7 @@
         <h3 class="panel-title"><%= @user.name %></h3>
       </div>
       <div class="panel-body al-c">
-          <% if @profile.icon_image.present? %>
             <%= attachment_image_tag @profile, :icon_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
-          <% else %>
-            <!-- 下記、本当は不要。後で直す -->
-            <%= attachment_image_tag @profile, :icon_image, :fill, 60, 60, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
-          <% end %>
       </div>
     </div>
   </aside>
