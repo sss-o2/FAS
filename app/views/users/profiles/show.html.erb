@@ -15,8 +15,8 @@
     </div>
   </aside>
   <div class="col-md-8">
-  <p><span class="orange b"><%= @user.name %></span>
- 
+  <p>ユーザー名:<span class="orange b"><%= @user.name %></span></p>
+  <p>e-mail:<span class="orange b"><%= @user.email %></span></p>
   <p class="orange b">自己紹介</p>
   <% if @profile.introduce? %>
     <p><%= @profile.introduce %></p>

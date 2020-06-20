@@ -20,9 +20,9 @@ Rails.application.routes.draw do
   end
 
   namespace :users do
-    get ":id/profile", :to => "profiles#show", as: 'user_profile_path'
-    get ":id/profile/edit", :to => "profiles#edit", as: 'edit_user_profile_path'
-    patch ":id/profile/update", :to => "profiles#update"
+    get ":id/profile", :to => "profiles#show", as: 'profile'
+    get ":id/profile/edit", :to => "profiles#edit", as: 'edit_profile'
+    patch ":id/profile/update", :to => "profiles#update", as: 'update_profile'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
