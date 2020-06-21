@@ -50,7 +50,11 @@ class PostsController < ApplicationController
   end
 
   def select_best_comment
-    @best_comment=Post.select_best_comment(params[:post][:best_comment])
+    @best_comment=Post.select_best_comment(
+      params[:post][:best_comment],
+      params[:post_id]
+    )
+    redirect_to post_path(params[:post_id])
   end
 
   private
