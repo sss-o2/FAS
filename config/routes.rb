@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'home/about'
 
   resources :posts do
+    post "select_best_comment", :to => "posts#select_best_comment", as: 'select_best_comment'
     resources :comments
   end
 

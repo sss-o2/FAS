@@ -29,7 +29,8 @@
   </div>
 </div>
 
-<%= form_with(model: @post, local: true) do |form| %>
+<!-- 投稿ユーザーだった場合、ベストアンサーボタンを表示しているが、複雑になるので別ページの方がいいかも-->
+<%= form_with(model: @post,url: "#{@post.id}/select_best_comment", method: 'post', local: true) do |form| %>
 <% @comments.each do |comment| %>
 <div class="card">
  <div class="card-header bg-info text-white">
@@ -58,6 +59,10 @@
       <% if current_user.id==comment.user_id %>
         <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
       <% end %>
+
+  <% if current_user.id==@post.user_id %>
+    <%= form.submit 'ベストアンサーを決定する', class: 'btn btn-info btn-block' %>
+  <% end %>
       <br/>
   </div>
 </div>

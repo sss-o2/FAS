@@ -31,7 +31,7 @@ class Post < ApplicationRecord
     end
   end
 
-  def select_best_comment(best_comment)
+  def self.select_best_comment(best_comment)
     post = Post.find(params[:id])
     post.update(best_comment_id: best_comment)
   end
