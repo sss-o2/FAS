@@ -12,7 +12,9 @@
       <h4><%= @post.title %></h4>
   </div>
   <div class="card-body">
-      <p class="card-text"><%= @post.body %></p>
+      <p class="card-text">
+        <%= @post.body %>
+      </p>
 
       <% if @post.post_images.present? %>
         <% @post.post_images.each do |image| %>
@@ -31,39 +33,44 @@
 
 <!-- 投稿ユーザーだった場合、ベストアンサーボタンを表示しているが、複雑になるので別ページの方がいいかも-->
 <%= form_with(model: @post,url: "#{@post.id}/select_best_comment", method: 'post', local: true) do |form| %>
-<% @comments.each do |comment| %>
-<div class="card">
- <div class="card-header bg-info text-white">
- ユーザーアイコン
-      <%= comment.user.name %>
-      <%= comment.created_at %>
-      <%= comment.updated_at %>
-      <br/>
- </div>
-  <div class="card-body">
-      <p class="card-text">
-       <%= comment.body %>
-      </p>
+  <% @comments.each do |comment| %>
+  <div class="card">
+    <div class="card-header bg-info text-white">
+    ユーザーアイコン
+          <%= comment.user.name %>
+          <%= comment.created_at %>
+          <%= comment.updated_at %>
+          <br/>
+    </div>
+      <div class="card-body">
+          <p class="card-text">
+            <% if @post.best_comment_id==comment.id %>
+              ベストコメント
+              <%= image_tag 'crown.png',:size =>'60x60' %>
+              <br/>
+            <% end %>
+          <%= comment.body %>
+          </p>
 
+          <% if (current_user.id==@post.user_id) && (@post.status==true) %>
+            <%= form.radio_button :best_comment, comment.id %>
+            <%= form.label :best_comment, "ベストアンサーに選ぶ", {value: comment.id, style: "display: inline-block;"} %>
+          <% end %>
+
+          <% if comment.post_images.present? %>
+            <% comment.post_images.each do |image| %>
+              <%= attachment_image_tag image, :image, :fill, 200, 200 %>
+            <% end %>
+          <% end %>
+          
+          <% if current_user.id==comment.user_id %>
+            <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
+          <% end %>
+      </div>
+    </div>
+    <% end %>
       <% if (current_user.id==@post.user_id) && (@post.status==true) %>
-        <%= form.radio_button :best_comment, comment.id %>
-        <%= form.label :best_comment, "ベストアンサーに選ぶ", {value: comment.id, style: "display: inline-block;"} %>
+          <%= form.submit 'ベストアンサーを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストアンサーを決めてコメント募集を終了しますか？?'} %>
       <% end %>
-
-      <% if comment.post_images.present? %>
-        <% comment.post_images.each do |image| %>
-          <%= attachment_image_tag image, :image, :fill, 200, 200 %>
-        <% end %>
-      <% end %>
-      
-      <% if current_user.id==comment.user_id %>
-        <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
-      <% end %>
-  </div>
-</div>
-<% end %>
-  <% if (current_user.id==@post.user_id) && (@post.status==true) %>
-      <%= form.submit 'ベストアンサーを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストアンサーを決めてコメント募集を終了しますか？?'} %>
-  <% end %>
-        <br/>
+            <br/>
 <% end %>
