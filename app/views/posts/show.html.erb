@@ -45,7 +45,7 @@
        <%= comment.body %>
       </p>
 
-      <% if current_user.id==@post.user_id %>
+      <% if (current_user.id==@post.user_id) && (@post.status==true) %>
         <%= form.radio_button :best_comment, comment.id %>
         <%= form.label :best_comment, "ベストアンサーに選ぶ", {value: comment.id, style: "display: inline-block;"} %>
       <% end %>
@@ -59,12 +59,11 @@
       <% if current_user.id==comment.user_id %>
         <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
       <% end %>
-
-  <% if current_user.id==@post.user_id %>
-    <%= form.submit 'ベストアンサーを決定する', class: 'btn btn-info btn-block' %>
-  <% end %>
-      <br/>
   </div>
 </div>
 <% end %>
+  <% if (current_user.id==@post.user_id) && (@post.status==true) %>
+      <%= form.submit 'ベストアンサーを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストアンサーを決めてコメント募集を終了しますか？?'} %>
+  <% end %>
+        <br/>
 <% end %>

@@ -54,7 +54,7 @@ class PostsController < ApplicationController
       params[:post][:best_comment],
       params[:post_id]
     )
-    redirect_to post_path(params[:post_id])
+    redirect_to posts_path
   end
 
   private

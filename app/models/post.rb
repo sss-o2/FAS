@@ -31,9 +31,9 @@ class Post < ApplicationRecord
     end
   end
 
-  def self.select_best_comment(best_comment_id, post_id)
+  def self.select_best_comment(best_comment_id,post_id)
     post = Post.find(post_id)
-    post.update(best_comment_id: best_comment_id)
+    post.update(best_comment_id: best_comment_id,status: false)
   end
 
 end

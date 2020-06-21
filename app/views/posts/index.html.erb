@@ -5,6 +5,8 @@
         <% if user_signed_in? %>
          <%= link_to "投稿", new_post_path, class: 'btn btn-outline-info' %>
          <%= link_to "マイページ", users_profile_path(current_user.id), class: 'btn btn-outline-info' %>
+         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-info' %>
+         <%= current_user.name %>
         <% else %>
          <%= link_to "投稿", new_user_session_path, class: 'btn btn-outline-info' %>
         <% end %>
