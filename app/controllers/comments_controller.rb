@@ -16,11 +16,13 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment.post_id=@post.id
 
+    #binding.pry
     if @comment.save
       redirect_to post_path(@post),notice: 'コメントしました'
     else
       render :new
     end
+
   end
 
   def edit

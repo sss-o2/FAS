@@ -10,7 +10,6 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @post.post_images.build
-    #binding.pry
   end
 
   def create
@@ -48,6 +47,10 @@ class PostsController < ApplicationController
 
   def search
     @posts = Post.search(params[:search])
+  end
+
+  def select_best_comment
+    @best_comment=Post.select_best_comment(params[:best_comment])
   end
 
   private

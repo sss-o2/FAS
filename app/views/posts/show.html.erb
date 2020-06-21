@@ -29,6 +29,7 @@
   </div>
 </div>
 
+<%= form_with(model: @post, local: true) do |form| %>
 <% @comments.each do |comment| %>
 <div class="card">
  <div class="card-header bg-info text-white">
@@ -43,6 +44,11 @@
        <%= comment.body %>
       </p>
 
+      <% if current_user.id==@post.user_id %>
+        <%= form.radio_button :best_comment, comment.id %>
+        <%= form.label :best_comment, "ベストアンサーに選ぶ", {value: comment.id, style: "display: inline-block;"} %>
+      <% end %>
+
       <% if comment.post_images.present? %>
         <% comment.post_images.each do |image| %>
           <%= attachment_image_tag image, :image, :fill, 200, 200 %>
@@ -55,4 +61,5 @@
       <br/>
   </div>
 </div>
+<% end %>
 <% end %>
