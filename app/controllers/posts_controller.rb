@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   end
 
   def select_best_comment
-    @best_comment=Post.select_best_comment(params[:best_comment])
+    @best_comment=Post.select_best_comment(params[:post][:best_comment])
   end
 
   private
