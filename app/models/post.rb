@@ -34,6 +34,8 @@ class Post < ApplicationRecord
   def self.select_best_comment(best_comment_id,post_id)
     post = Post.find(post_id)
     post.update(best_comment_id: best_comment_id,status: false)
+    comment=Comment.find(best_comment_id)
+    comment.update(best_flag: true)
   end
 
 end

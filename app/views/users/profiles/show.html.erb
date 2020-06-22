@@ -22,6 +22,7 @@
   <div class="col-md-8">
   <p>ユーザー名:<span class="orange b"><%= @user.name %></span></p>
   <p>e-mail:<span class="orange b"><%= @user.email %></span></p>
+  <p>ベストコメント数<span class="orange b"><%= @bc_num %></span></p>
   <p class="orange b">自己紹介</p>
   <% if @profile.introduce? %>
     <p><%= @profile.introduce %></p>

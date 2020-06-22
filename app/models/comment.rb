@@ -1,4 +1,5 @@
 class Comment < ApplicationRecord
+  validates :best_flag, inclusion: { in: [true, false] }
   belongs_to :user
   belongs_to :post
   has_many :post_images, dependent: :destroy, foreign_key:'comment_id'
