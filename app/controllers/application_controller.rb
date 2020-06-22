@@ -6,4 +6,15 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 
+  def deadline_post_deleate
+    posts=Post.where(status: true)
+    today=Date.today
+    posts.each do |post|
+      #binding.pry
+      if post.deadline < today
+        post.update(status: false)
+      end
+    end
+  end
+
 end

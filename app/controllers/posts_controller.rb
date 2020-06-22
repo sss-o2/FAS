@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :deadline_post_deleate, only: [:index]
+
   def index
     #@posts = Post.all
     @posts = Post.search(params[:search],params[:status])

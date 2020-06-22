@@ -22,7 +22,7 @@
         <% end %>
       <% end %>
       
-      <% unless current_user.id==@post.user_id %>
+      <% unless (current_user.id==@post.user_id) && (@post.status==true) %>
           <%= link_to "返信する", new_post_comment_path(@post.id), class: 'btn btn-outline-info' %>
       <% end %>
   </div>
@@ -65,6 +65,7 @@
 
           <!-- いいね機能 -->
           <p>
+          <% if current_user.id!=comment.user_id %>
             <% if comment.favorited_by?(current_user) %>
               <li class="favorite-list">
                   <%= link_to post_comment_favorites_path(comment.post_id,comment.id), method: :delete do %>
@@ -73,13 +74,18 @@
                   <% end %>
               </li>
               <% else %>
-              <li>
+              <li class="favorite-list">
                   <%= link_to post_comment_favorites_path(comment.post_id,comment.id), method: :post do %>
                   <i class="fa fa-heart-o" aria-hidden="true"></i>
                   <%= comment.favorites.count %> いいね
                   <% end %>
               </li>
             <% end %>
+          <% else %>
+            <li class="favorite-list">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <%= comment.favorites.count %> いいね
+          <% end %>
           </p>
           
           <% if current_user.id==comment.user_id %>

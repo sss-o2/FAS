@@ -29,9 +29,10 @@
       <th scope="col" style="width: 40px">No.</th>
       <th scope="col" style="width: 700px">投稿タイトル</th>
       <th scope="col" style="width: 700px">タグ</th>
-      <th scope="col">投稿者</th>
-      <th scope="col">投稿日</th>
-      <th scope="col">更新日時</th>
+      <th scope="col" style="width: 80px">投稿者</th>
+      <th scope="col" style="width: 100px">投稿日</th>
+      <th scope="col" style="width: 100px">更新日時</th>
+      <th scope="col" style="width: 100px">コメント締切</th>
     </tr>
   </thead>
   <tbody>
@@ -39,17 +40,17 @@
     <%=link_to post.title, "/posts/#{post.id}" %>
         <tr>
           <%= link_to post_path(post.id) do %>
-          <% if post.status==false %>
-            <th>募集終了<%= post.id %></th>
-          <% else %>
             <th><%= post.id %></th>
-          <% end %>
-          
-          <td><%= post.title %><p>コメント数：<%= post.comments.count %></p></td>
-          <td><%= render 'posts/tag_list', tag_list: post.tag_list %></td>
-          <td><%= post.user.name %></td>
-          <td><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-          <td><%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
+            <% if post.status==false %>
+              <td><%= post.title %><br><span style="color:red">募集終了</span><br>コメント数：<%= post.comments.count %></p></td>
+            <% else %>
+              <td><%= post.title %><br>コメント数：<%= post.comments.count %></td>
+            <% end %>
+              <td><%= render 'posts/tag_list', tag_list: post.tag_list %></td>
+              <td><%= post.user.name %></td>
+              <td><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+              <td><%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
+              <td><%= post.deadline.strftime("%Y-%m-%d") %></td>
           <% end %>
         </tr>
     <% end %>
