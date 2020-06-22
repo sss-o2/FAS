@@ -45,11 +45,11 @@
             <th><%= post.id %></th>
           <% end %>
           
-          <td><%= post.title %></td>
+          <td><%= post.title %><p>コメント数：<%= post.comments.count %></p></td>
           <td><%= render 'posts/tag_list', tag_list: post.tag_list %></td>
           <td><%= post.user.name %></td>
-          <td><%= post.created_at %></td>
-          <td><%= post.updated_at %></td>
+          <td><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
           <% end %>
         </tr>
     <% end %>
