@@ -69,7 +69,7 @@
       </div>
     </div>
     <% end %>
-      <% if (current_user.id==@post.user_id) && (@post.status==true) %>
+      <% if (current_user.id==@post.user_id) && (@post.status==true) && (@post.comments.present?) %>
           <%= form.submit 'ベストアンサーを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストアンサーを決めてコメント募集を終了しますか？?'} %>
       <% end %>
             <br/>
