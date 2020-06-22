@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   resources :posts do
     post "select_best_comment", :to => "posts#select_best_comment", as: 'select_best_comment'
-    resources :comments
+    resources :comments do
+      resource :favorites, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :destroy]
+    end
   end
 
   devise_for :users, :controllers => {

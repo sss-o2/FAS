@@ -54,7 +54,7 @@
 
           <% if (current_user.id==@post.user_id) && (@post.status==true) %>
             <%= form.radio_button :best_comment, comment.id %>
-            <%= form.label :best_comment, "ベストアンサーに選ぶ", {value: comment.id, style: "display: inline-block;"} %>
+            <%= form.label :best_comment, "ベストコメントに選ぶ", {value: comment.id, style: "display: inline-block;"} %>
           <% end %>
 
           <% if comment.post_images.present? %>
@@ -70,7 +70,7 @@
     </div>
     <% end %>
       <% if (current_user.id==@post.user_id) && (@post.status==true) && (@post.comments.present?) %>
-          <%= form.submit 'ベストアンサーを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストアンサーを決めてコメント募集を終了しますか？?'} %>
+          <%= form.submit 'ベストコメントを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストコメントを決めてコメント募集を終了しますか？?'} %>
       <% end %>
             <br/>
 <% end %>
