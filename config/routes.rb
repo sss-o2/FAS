@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   namespace :users do
+    post ":id/contact",:to => "profiles#contact",as: 'contact'
     get ":id/profile", :to => "profiles#show", as: 'profile'
     get ":id/profile/edit", :to => "profiles#edit", as: 'edit_profile'
     patch ":id/profile/update", :to => "profiles#update", as: 'update_profile'

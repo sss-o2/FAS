@@ -1,4 +1,9 @@
 class InquiryMailer < ApplicationMailer
+  def test_mail(title,message)
+    p "#{title}を送りました。"
+    @title=title
+    @message=message
+  end
   def send_mail(inquiry)
     @inquiry = inquiry
     mail(

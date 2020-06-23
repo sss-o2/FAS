@@ -45,3 +45,9 @@
   <% end %>
   </div>
 </div>
+
+<%= form_tag users_contact_path(@user.id) do %>
+  <%= text_field_tag :title %>
+  <%= text_field_tag :message %>
+  <%= submit_tag %>
+<% end %>
