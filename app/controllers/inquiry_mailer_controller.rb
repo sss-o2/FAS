@@ -33,7 +33,7 @@ class InquiryMailerController < ApplicationController
     if params[:back]
       render :action => 'new'
     else
-      if InquiryMailer.send_mail(@inquiry).deliver
+      if (InquiryMailer.to_admin_mail(@inquiry).deliver) && (InquiryMailer.to_user_mail(@inquiry).deliver)
         @inquiry.save
         render :action => 'done'
       end

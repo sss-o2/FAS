@@ -5,13 +5,23 @@ class InquiryMailer < ApplicationMailer
     @message=message
   end
 
-  def send_mail(inquiry)
+  def to_admin_mail(inquiry)
     @inquiry = inquiry
     p "#{@inquiry.subject}を送りました。"
     mail(
-      from: 'o.matsu.youser12@gmail.com',
-      to:   'fas.appadm@gmail.com',
+      from: @inquiry.email,
+      to:   ENV['MAIL_ADDRESS'],
       subject: 'お問い合わせ通知'
+    )
+  end
+
+  def to_user_mail(inquiry)
+    @inquiry = inquiry
+    p "#{@inquiry.subject}を送りました。"
+    mail(
+      from: ENV['MAIL_ADDRESS'],
+      to:   @inquiry.email,
+      subject: '【FAS運営】お問い合わせありがとうございます'
     )
   end
 end
