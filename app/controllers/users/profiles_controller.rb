@@ -17,6 +17,7 @@ class Users::ProfilesController < ApplicationController
   def edit
     @profile = Profile.find(params[:id])
     @user=User.find(@profile.user_id)
+    @bc_num=Comment.where(best_flag: true).where(user_id: @user.id).count
     # binding.pry
   end
 
