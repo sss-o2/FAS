@@ -1,5 +1,4 @@
 <div class="d-flex align-items-center">
-    <h1>プロフィール</h1>
     <div class="ml-auto posts_button">
         <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
         <% if @user.id=current_user.id? %>
@@ -16,32 +15,59 @@
       </div>
       <div class="panel-body al-c">
             <%= attachment_image_tag @profile, :icon_image, :fill, 200, 200, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %>
+            <br><%= @user.name %>
+            <% if @user.id=current_user.id? %>
+              <p>登録email:<%= @user.email %></span></p>
+            <% end %>
+            <p>自己紹介<br>
+            <% if @profile.introduce? %>
+              <p><%= @profile.introduce %></p>
+            <% else %>
+              <p>未設定</p><!-- 表示確認ようなので後で削除 -->
+            <% end %>
+            </p>
+            <!-- 横並びにしてアイコン表示にしたい -->
+            <br><i class="fas fa-crown" aria-hidden="true"></i>ベストコメント数：<%= @bc_num %>
+            <br><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいねした数<%= @fa_num %>
+            <br><i class="far fa-heart" aria-hidden="true" style="color: red;"></i>いいねもらった数<%= @bc_num %>
+
+            <hr/>
+
+            <p>店舗サイト</p>
+            <% if @profile.hp_url? %>
+              <p><%= @profile.hp_url %></p>
+            <% else %>
+              <p>未設定</p>
+            <% end %>
+
+              <p>店舗住所</p>
+              <% if @profile.address? %>
+                <p><%= @profile.address %></p>
+              <% else %>
+                <p>未設定</p>
+              <% end %>
       </div>
     </div>
   </aside>
+
   <div class="col-md-8">
-  <p>ユーザー名:<span class="orange b"><%= @user.name %></span></p>
-  <p>e-mail:<span class="orange b"><%= @user.email %></span></p>
-  <p>ベストコメント数<span class="orange b"><%= @bc_num %></span></p>
-  <p class="orange b">自己紹介</p>
-  <% if @profile.introduce? %>
-    <p><%= @profile.introduce %></p>
-  <% else %>
-    <p>未設定</p>
-  <% end %>
-
-  <p class="orange b">HP</p>
-  <% if @profile.hp_url? %>
-    <p><%= @profile.hp_url %></p>
-  <% else %>
-    <p>未設定</p>
-  <% end %>
-
-  <p class="orange b">住所</p>
-  <% if @profile.address? %>
-    <p><%= @profile.address %></p>
-  <% else %>
-    <p>未設定</p>
-  <% end %>
-  </div>
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">投稿一覧（全<%= @user_posts.count %>件）</h4>
+        <p class="card-text">
+          <% @user_posts.each do |post| %>
+            <%= render 'posts/tag_list', tag_list: post.tag_list %><br>
+            <span class="font-weight-bold"><%= link_to post.title,post_path(post.id) %></span>
+            <% if post.status==false %>
+              <span style="color:red">（募集終了）</span><br>
+            <% end %>
+              <p class="post_body text-muted"><%= post.body %></p>
+              <i class="far fa-comment" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %>
+              <br><%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
+            <hr/>
+        <% end %>
+        </p>
+      </div>
+    </div>
+ </div>
 </div>

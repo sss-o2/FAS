@@ -12,58 +12,71 @@
 
  <div class="album py-5 bg-light">
     <div class="container">
+    <%= form_tag posts_path, :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+      <%= check_box_tag :status, checked = true,value=false %><!-- checkedでチェックがあった場合trueが:statusに送られる。value=falseで初期値チェックなし -->
+      <%= label_tag :status, "募集終了も含める" %>
+    </p>
+    <% end %>
+  <div class="d-flex align-items-center">
+    <div class="ml-auto posts_button">
+        <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
+        <% if user_signed_in? %>
+         <%= link_to "投稿", new_post_path, class: 'btn btn-outline-info' %>
+        <% else %>
+         <%= link_to "投稿", new_user_session_path, class: 'btn btn-outline-info' %>
+        <% end %>
+    </div>
+  </div>
 
    <div class="album py-5 bg-light">
     <div class="container">
 
       <div class="row">
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
 
+      <% @posts.each do |post| %>
         <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <%# <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> %>
+            <% post.post_images.each do |image| %>
+              <% if image.present? %>
+                <%= attachment_image_tag image,:image,size: '300x300', fallback: "no_image.jpg", class: "card-img-top" %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', class: "card-img-top", size: '80x80' %>
+              <% end %>
+             <% break %>
+            <% end %>
+            <% if post.post_images.present? %>
+            <% else %>
+              <%= image_tag('no_image.jpg', class: "card-img-top",size: '300x300') %>
+            <% end %>
+            <div class="card-body">
+              
+              <p class="card-text">
+                  <%= link_to post.title,post_path(post.id) %>
+                  <% if post.status==false %>
+                    <span style="color:red">（募集終了）</span>
+                  <% end %>
+                  <br>
+                  <div class="post_body"><%= post.body %></div>
+              </p>
+              <div class="text-right">
+              <%= link_to users_profile_path(post.user_id) do %>
+                <%= attachment_image_tag post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %>
+                </div>
+              <% end %>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted"><i class="far fa-comment" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %></small>
+                <small class="text-muted">投稿：<%= post.created_at.strftime("%Y-%m-%d") %></small>
+              </div>
+              <%= render 'posts/tag_list', tag_list: post.tag_list %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+        <%# <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
             <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
             <div class="card-body">
@@ -77,111 +90,11 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
+        </div> %>
 
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
-  
-<div class="d-flex align-items-center">
-    <h1>投稿一覧</h1>
-    <div class="ml-auto posts_button">
-        <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
-        <% if user_signed_in? %>
-         <%= link_to "投稿", new_post_path, class: 'btn btn-outline-info' %>
-         <%= link_to "マイページ", users_profile_path(current_user.id), class: 'btn btn-outline-info' %>
-         <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'btn btn-outline-info' %>
-         <%= current_user.name %>
-        <% else %>
-         <%= link_to "投稿", new_user_session_path, class: 'btn btn-outline-info' %>
-        <% end %>
-
-    </div>
-</div>
-
-<%= form_tag posts_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-    <%= check_box_tag :status, checked = true,value=false %><!-- checkedでチェックがあった場合trueが:statusに送られる。value=falseで初期値チェックなし -->
-    <%= label_tag :status, "募集終了も含める" %>
-  </p>
-<% end %>
 
 <table class="table table-bordered border-primary table-hover table-sm posts_table">
   <thead class="thead-dark">
