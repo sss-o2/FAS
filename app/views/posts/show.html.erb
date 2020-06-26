@@ -8,8 +8,15 @@
 
 <div class="card">
   <div class="card-header">
-      <h4>アイコン<%= @post.user.name %><%= @post.title %></h4>
-      投稿 <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %>
+      <h4><%= @post.title %></h4>
+      <div style="text-align:right">
+        <%= link_to users_profile_path(@post.user_id) do %>
+                  <%= attachment_image_tag @post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+                  <%= @post.user.name %>
+        <% end %>
+        <br>
+        投稿 <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %>
+      </div>
   </div>
   <div class="card-body">
       <p class="card-text">
@@ -39,8 +46,20 @@
         ベストコメント
         <%= image_tag 'crown.png',:size =>'60x60' %>
         <br/>
-      <% end %>
-    <%= comment.body %>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-2 text-right">
+        <%= link_to users_profile_path(comment.user_id) do %>
+              <%= attachment_image_tag comment.user.profile, :icon_image, :fill, 60, 60, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+              <%= comment.user.name %>
+        <% end %>
+      </div>
+      <div class="col-md-10 text-left">
+        <div class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+        <%= comment.body %>
+      </div>
+    </div>
     </p>
 
     <% if (current_user.id==@post.user_id) && (@post.status==true) %>
@@ -53,14 +72,8 @@
         <%= attachment_image_tag image, :image, :fill, 200, 200 %>
       <% end %>
     <% end %>
-
-      <div class="text-right">
-            ユーザーアイコン
-            <%= comment.user.name %>
-            <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %>
-            <%= comment.updated_at.strftime("%Y-%m-%d %H:%M") %>    
+  
             <br/>
-      </div>
               
             <!-- いいね機能 -->
             <p>

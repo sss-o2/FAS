@@ -10,11 +10,10 @@
         <li class="nav-item active">
           <%= link_to "Home", posts_path, class: 'nav-link' %>
         </li>
-        <li class="nav-item">
-          <%= link_to users_profile_path(current_user.id), class: 'nav-link' do %>
-            <div><i class="fas fa-user-circle" aria-hidden="true"></i><br>
-            <span style="font-size:10px; margin-top:0px;padding-top:0px"><%= current_user.name %></span>
-            </div>
+       <%= link_to users_profile_path(current_user.id), class: 'nav-link' do %>
+              <div><i class="fas fa-user-circle" aria-hidden="true"></i>
+              <span style="font-size:10px; margin-top:0px;padding-top:0px"><%= current_user.name %></span>
+              </div>
           <% end %>
         </li>
         <li class="nav-item">
