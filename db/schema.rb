@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_13_071913) do
+ActiveRecord::Schema.define(version: 2020_06_24_011217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,23 @@ ActiveRecord::Schema.define(version: 2020_06_13_071913) do
     t.integer "image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "best_flag", default: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "comment_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "inquiries", force: :cascade do |t|
+    t.string "email"
+    t.string "name"
+    t.string "subject"
+    t.text "message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "post_images", force: :cascade do |t|
@@ -29,6 +46,8 @@ ActiveRecord::Schema.define(version: 2020_06_13_071913) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "post_id"
+    t.bigint "comment_id"
+    t.index ["comment_id"], name: "index_post_images_on_comment_id"
     t.index ["post_id"], name: "index_post_images_on_post_id"
   end
 
@@ -41,6 +60,18 @@ ActiveRecord::Schema.define(version: 2020_06_13_071913) do
     t.date "deadline", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "best_comment_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "introduce"
+    t.string "hp_url"
+    t.string "address"
+    t.string "icon_image_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|
@@ -84,6 +115,8 @@ ActiveRecord::Schema.define(version: 2020_06_13_071913) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "post_images", "comments"
   add_foreign_key "post_images", "posts"
+  add_foreign_key "profiles", "users"
   add_foreign_key "taggings", "tags"
 end

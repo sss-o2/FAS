@@ -59,6 +59,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
 gem 'rails_admin', '~> 2.0.0.beta'
+gem 'rails_admin_tag_list'
 gem 'cancancan'
 gem 'rubocop'
 gem 'rubocop-rails'
@@ -70,6 +71,6 @@ gem 'acts-as-taggable-on', '~> 6.0'
 gem 'rake', '< 11.0'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'dotenv-rails'
-group :production do
-  gem 'mysql2'
-end
+# group :production do
+#   gem 'mysql2'
+# end

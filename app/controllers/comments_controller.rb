@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :deadline_post_deleate, only: [:create]
+
   def index
    # 不要？
   end
@@ -11,16 +13,23 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    @comment.user_id = current_user.id
     @post = Post.find(params[:post_id])
-    @comment.post_id=@post.id
-
-    if @comment.save
-      redirect_to post_path(@post),notice: 'コメントしました'
+    today=Date.today
+    # もし募集期間が過ぎていたらリダイレクト
+    if @post.deadline < today
+      redirect_to posts_path,notice: 'この投稿はコメント募集終了しています。'
     else
-      render :new
+      @comment = Comment.new(comment_params)
+      @comment.user_id = current_user.id
+      @comment.post_id=@post.id
+      #binding.pry
+      if @comment.save
+        redirect_to post_path(@post),notice: 'コメントしました'
+      else
+        render :new
+      end
     end
+
   end
 
   def edit

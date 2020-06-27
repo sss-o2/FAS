@@ -14,3 +14,32 @@
  *= require_self
  */
  @import "bootstrap";
+body{
+  margin-top: 65px;
+}
+.form-signin_up {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+ .favorite-list{
+   list-style: none;
+ }
+ .jumbotron{
+  background-color: white;
+  background:url(top5.jpg) center no-repeat;
+	background-size: cover;
+}
+.bg-color{
+	background:rgba(255,255,255,0.5);
+}
+.bg-mask {
+  height: 100%;
+  background: rgba(255,255,255,0.5);
+}
+.post_body{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

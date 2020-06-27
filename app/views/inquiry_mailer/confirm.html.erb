@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-12 col-lg-6 offset-lg-3">
+      <h3>お問い合わせ</h3>
+      <hr />
+
+      <%= form_with model: @inquiry, local: true, method: :get, url: done_inquiry_mailer_path do |form| %>
+
+        <div class="form-group">
+          <%= form.label :name, '名前' %>
+          <%= form.text_field :name, value: @inquiry.name, id: 'name', class: 'form-control-plaintext', :placeholder => '名前' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :email, 'メールアドレス' %>
+          <%= form.text_field :email, value: @inquiry.email, id: 'email', class: 'form-control-plaintext', :placeholder => 'メールアドレス' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :subject, '件名' %>
+          <%= form.text_field :subject, value: @inquiry.subject, id: 'subject', class: 'form-control-plaintext', :placeholder => '件名' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :message, 'お問い合わせ内容' %>
+          <%= form.text_area :message, value: @inquiry.message, id: 'message', class: 'form-control-plaintext', :placeholder => 'お問い合わせ内容', :rows => '5' %>
+        </div>
+
+        <p>この内容で送信します。よろしいですか？</p>
+
+        <div class="float-right">
+          <%= form.submit "戻る", name: 'back', class: "btn btn-dark" %>
+          <%= form.submit "送信", class: "btn btn-dark" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

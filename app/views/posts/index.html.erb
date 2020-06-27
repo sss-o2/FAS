@@ -1,20 +1,96 @@
-<div class="d-flex align-items-center">
-    <h1>投稿一覧</h1>
+<section class="jumbotron text-center">
+  <div class="bg-mask">
+    <div class="container">
+      <h1 class="jumbotron-heading">FAS</h1>
+      <p class="lead text-muted">要件に合う服をみんなに教えてもらうサイト</p>
+      <p>
+        <%= link_to "About", home_about_path %>
+      </p>
+    </div>
+  </div>
+</section>
+
+ <div class="album py-5 bg-light">
+    <div class="container">
+    <%= form_tag posts_path, :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "タイトル検索", :name => nil %>
+      <%= check_box_tag :status, checked = true,value=false %><!-- checkedでチェックがあった場合trueが:statusに送られる。value=falseで初期値チェックなし -->
+      <%= label_tag :status, "募集終了も含める" %>
+    </p>
+    <% end %>
+  <div class="d-flex align-items-center">
     <div class="ml-auto posts_button">
         <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
-        <%= link_to "投稿", new_post_path, class: 'btn btn-outline-info' %>
-
+        <% if user_signed_in? %>
+         <%= link_to "投稿", new_post_path, class: 'btn btn-outline-info' %>
+        <% else %>
+         <%= link_to "投稿", new_user_session_path, class: 'btn btn-outline-info' %>
+        <% end %>
     </div>
-</div>
+  </div>
+
+   <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+
+      <% @posts.each do |post| %>
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <%# <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> %>
+            <% post.post_images.each do |image| %>
+              <% if image.present? %>
+                <%= attachment_image_tag image,:image,size: '300x300', fallback: "no_image.jpg", class: "card-img-top" %>
+              <% else %>
+                <%= image_tag 'no_image.jpg', class: "card-img-top", size: '80x80' %>
+              <% end %>
+             <% break %>
+            <% end %>
+            <% if post.post_images.present? %>
+            <% else %>
+              <%= image_tag('no_image.jpg', class: "card-img-top",size: '300x300') %>
+            <% end %>
+            <div class="card-body">
+              
+              <p class="card-text">
+                  <%= link_to post.title,post_path(post.id) %>
+                  <% if post.status==false %>
+                    <span style="color:red">（募集終了）</span>
+                  <% end %>
+                  <br>
+                  <div class="post_body"><%= post.body %></div>
+              </p>
+              <div class="text-right">
+              <%= link_to users_profile_path(post.user_id) do %>
+                <%= attachment_image_tag post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+                <span style="font-size:10px;"><%= post.user.name %></span>
+                </div>
+              <% end %>
+              <div class="d-flex justify-content-between align-items-center">
+                <small class="text-muted"><i class="far fa-comment" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %></small>
+                <small class="text-muted">投稿：<%= post.created_at.strftime("%Y-%m-%d") %></small>
+              </div>
+              <%= render 'posts/tag_list', tag_list: post.tag_list %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+
 <table class="table table-bordered border-primary table-hover table-sm posts_table">
   <thead class="thead-dark">
     <tr>
       <th scope="col" style="width: 40px">No.</th>
       <th scope="col" style="width: 700px">投稿タイトル</th>
       <th scope="col" style="width: 700px">タグ</th>
-      <th scope="col">投稿者</th>
-      <th scope="col">投稿日</th>
-      <th scope="col">更新日時</th>
+      <th scope="col" style="width: 80px">投稿者</th>
+      <th scope="col" style="width: 100px">投稿日</th>
+      <th scope="col" style="width: 100px">更新日時</th>
+      <th scope="col" style="width: 100px">コメント締切</th>
     </tr>
   </thead>
   <tbody>
@@ -22,17 +98,17 @@
     <%=link_to post.title, "/posts/#{post.id}" %>
         <tr>
           <%= link_to post_path(post.id) do %>
-          <% if post.status==false %>
-            <th>募集終了<%= post.id %></th>
-          <% else %>
             <th><%= post.id %></th>
-          <% end %>
-          
-          <td><%= post.title %></td>
-          <td><%= render 'posts/tag_list', tag_list: post.tag_list %></td>
-          <td><%= post.user.name %></td>
-          <td><%= post.created_at %></td>
-          <td><%= post.updated_at %></td>
+            <% if post.status==false %>
+              <td><%= post.title %><br><span style="color:red">募集終了</span><br>コメント数：<%= post.comments.count %></p></td>
+            <% else %>
+              <td><%= post.title %><br>コメント数：<%= post.comments.count %></td>
+            <% end %>
+              <td><%= render 'posts/tag_list', tag_list: post.tag_list %></td>
+              <td><%= post.user.name %></td>
+              <td><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+              <td><%= post.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
+              <td><%= post.deadline.strftime("%Y-%m-%d") %></td>
           <% end %>
         </tr>
     <% end %>

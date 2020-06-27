@@ -1,58 +1,122 @@
 <div class="d-flex align-items-center mt-4 mb-4">
     <div class="ml-auto posts_button">
-        <%= link_to "投稿一覧", posts_path, class: 'btn btn-outline-info' %>
-        <% if current_user.id==@post.user_id %>
+        <% if user_signed_in? && (current_user.id==@post.user_id) %>
           <%= link_to "編集", edit_post_path, class: 'btn btn-outline-info' %>
         <% end %>
     </div>
 </div>
 
 <div class="card">
-  <div class="card-header bg-info text-white">
-      <h4><%= @post.title %></h4>
+  <div class="card-header">
+      <h4><%= @post.title %>
+      <% if @post.status==false %>
+          <span style="color:red">（募集終了）</span>
+      <% end %></h4>
+      <div style="text-align:right">
+        <%= link_to users_profile_path(@post.user_id) do %>
+                  <%= attachment_image_tag @post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+                  <%= @post.user.name %>
+        <% end %>
+        <br>
+        投稿 <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %><br>
+        返信募集締め切り <%= @post.deadline.strftime("%Y-%m-%d") %>
+      </div>
   </div>
   <div class="card-body">
-      <p class="card-text"><%= @post.body %></p>
+      <p class="card-text">
+        <%= @post.body %>
+      </p>
 
       <% if @post.post_images.present? %>
         <% @post.post_images.each do |image| %>
           <%= attachment_image_tag image, :image, :fill, 200, 200 %>
         <% end %>
       <% end %>
-      
-      <% unless current_user.id==@post.user_id %>
+    
+    <% if user_signed_in? %>
+      <% unless (current_user.id==@post.user_id) && (@post.status==true) %>
           <%= link_to "返信する", new_post_comment_path(@post.id), class: 'btn btn-outline-info' %>
       <% end %>
-  </div>
-  <div class="card-footer">
-    <p class="text-right font-weight-bold mr-10"><%= @post.user.name %></p>
+    <% else %>
+      <%= link_to "ログインして返信する", new_user_session_path, class: 'btn btn-outline-info' %>
+    <% end %>
   </div>
 </div>
 
-<% @comments.each do |comment| %>
-<div class="card">
- <div class="card-header bg-info text-white">
- ユーザーアイコン
-      <%= comment.user.name %>
-      <%= comment.created_at %>
-      <%= comment.updated_at %>
-      <br/>
- </div>
-  <div class="card-body">
-      <p class="card-text">
-       <%= comment.body %>
-      </p>
+<div style="margin:30px 30px;">
+  <div class="border-bottom">回答<%= @comments.count %> 件</div>
+  <!-- 投稿ユーザーだった場合、ベストアンサーボタンを表示しているが、複雑になるので別ページの方がいいかも-->
 
-      <% if comment.post_images.present? %>
-        <% comment.post_images.each do |image| %>
-          <%= attachment_image_tag image, :image, :fill, 200, 200 %>
+  <%= form_with(model: @post,url: "#{@post.id}/select_best_comment", method: 'post', local: true) do |form| %>
+    <% @comments.each do |comment| %>
+
+    <% if @post.best_comment_id==comment.id %>
+        ベストコメント
+        <%= image_tag 'crown.png',:size =>'60x60' %>
+        <br/>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-2 text-right">
+        <%= link_to users_profile_path(comment.user_id) do %>
+              <%= attachment_image_tag comment.user.profile, :icon_image, :fill, 60, 60, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+              <%= comment.user.name %>
         <% end %>
+      </div>
+      <div class="col-md-10 text-left">
+        <div class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+        <%= comment.body %>
+      </div>
+    </div>
+    </p>
+
+    <% if (current_user.id==@post.user_id) && (@post.status==true) %>
+      <%= form.radio_button :best_comment, comment.id %>
+      <%= form.label :best_comment, "ベストコメントに選ぶ", {value: comment.id, style: "display: inline-block;"} %>
+    <% end %>
+
+    <% if comment.post_images.present? %>
+      <% comment.post_images.each do |image| %>
+        <%= attachment_image_tag image, :image, :fill, 200, 200 %>
       <% end %>
-      
-      <% if current_user.id==comment.user_id %>
-        <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
+    <% end %>
+  
+            <br/>
+              
+            <!-- いいね機能 -->
+            <p>
+            <% if current_user.id!=comment.user_id %>
+              <% if comment.favorited_by?(current_user) %>
+                <li class="favorite-list">
+                    <%= link_to post_comment_favorites_path(comment.post_id,comment.id), method: :delete do %>
+                    <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                    <%= comment.favorites.count %>
+                    <% end %>
+                </li>
+                <% else %>
+                <li class="favorite-list">
+                    <%= link_to post_comment_favorites_path(comment.post_id,comment.id), method: :post do %>
+                    <i class="far fa-heart" aria-hidden="true" style="color: red;"></i>
+                    <%= comment.favorites.count %>
+                    <% end %>
+                </li>
+              <% end %>
+            <% else %>
+              <li class="favorite-list">
+                <i class="far fa-heart" aria-hidden="true" style="color: red;"></i>
+              <%= comment.favorites.count %>
+            <% end %>
+            </p>
+            
+            <% if current_user.id==comment.user_id %>
+              <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
+            <% end %>
+          <hr style="margin-bottom:30px;">
       <% end %>
-      <br/>
-  </div>
+
+        <% if user_signed_in? && (current_user.id==@post.user_id) && (@post.status==true) && (@post.comments.present?) %>
+            <%= form.submit 'ベストコメントを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストコメントを決めてコメント募集を終了しますか？?'} %>
+        <% end %>
+              <br/>
+  <% end %>
 </div>
-<% end %>

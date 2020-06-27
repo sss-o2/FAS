@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
+  before_action :deadline_post_deleate, only: [:index]
+  before_action :authenticate_user!, only: [:new,:edit]
+
   def index
-    @posts = Post.all
+    #@posts = Post.all
+    @posts = Post.search(params[:search],params[:status])
     if params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}")
     end
@@ -9,7 +13,6 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @post.post_images.build
-    #binding.pry
   end
 
   def create
@@ -39,10 +42,23 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments
+    # binding.pry
   end
 
   def destroy
     # 不要な気がする。statusで削除するやん
+  end
+
+  def search
+    @posts = Post.search(params[:search])
+  end
+
+  def select_best_comment
+    @best_comment=Post.select_best_comment(
+      params[:post][:best_comment],
+      params[:post_id]
+    )
+    redirect_to posts_path
   end
 
   private
