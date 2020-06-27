@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center">
     <div class="ml-auto posts_button">
         <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
-        <% if @user.id=current_user.id? %>
+        <% if user_signed_in? && (@user.id==current_user.id) %>
          <%= link_to "編集", users_edit_profile_path(current_user.id), class: 'btn btn-outline-info' %>
         <% end %>
     </div>
@@ -16,7 +16,8 @@
       <div class="panel-body al-c">
             <%= attachment_image_tag @profile, :icon_image, :fill, 200, 200, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %>
             <br><%= @user.name %>
-            <% if @user.id=current_user.id? %>
+            
+            <% if user_signed_in? && (@user.id==current_user.id) %>
               <p>登録email:<%= @user.email %></span></p>
             <% end %>
             <p>自己紹介<br>
@@ -35,7 +36,7 @@
 
             <p>店舗サイト</p>
             <% if @profile.hp_url? %>
-              <p><%= @profile.hp_url %></p>
+              <p><%= link_to @profile.hp_url,@profile.hp_url %></p>
             <% else %>
               <p>未設定</p>
             <% end %>

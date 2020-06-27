@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center mt-4 mb-4">
     <div class="ml-auto posts_button">
-        <% if (current_user.id==@post.user_id) && user_signed_in? %>
+        <% if user_signed_in? && (current_user.id==@post.user_id) %>
           <%= link_to "編集", edit_post_path, class: 'btn btn-outline-info' %>
         <% end %>
     </div>
@@ -8,14 +8,18 @@
 
 <div class="card">
   <div class="card-header">
-      <h4><%= @post.title %></h4>
+      <h4><%= @post.title %>
+      <% if @post.status==false %>
+          <span style="color:red">（募集終了）</span>
+      <% end %></h4>
       <div style="text-align:right">
         <%= link_to users_profile_path(@post.user_id) do %>
                   <%= attachment_image_tag @post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
                   <%= @post.user.name %>
         <% end %>
         <br>
-        投稿 <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %>
+        投稿 <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %><br>
+        返信募集締め切り <%= @post.deadline.strftime("%Y-%m-%d") %>
       </div>
   </div>
   <div class="card-body">
@@ -28,10 +32,14 @@
           <%= attachment_image_tag image, :image, :fill, 200, 200 %>
         <% end %>
       <% end %>
-      
+    
+    <% if user_signed_in? %>
       <% unless (current_user.id==@post.user_id) && (@post.status==true) %>
           <%= link_to "返信する", new_post_comment_path(@post.id), class: 'btn btn-outline-info' %>
       <% end %>
+    <% else %>
+      <%= link_to "ログインして返信する", new_user_session_path, class: 'btn btn-outline-info' %>
+    <% end %>
   </div>
 </div>
 
@@ -88,7 +96,7 @@
                 <% else %>
                 <li class="favorite-list">
                     <%= link_to post_comment_favorites_path(comment.post_id,comment.id), method: :post do %>
-                    <i class="far fa-heart-o" aria-hidden="true"></i>
+                    <i class="far fa-heart" aria-hidden="true" style="color: red;"></i>
                     <%= comment.favorites.count %>
                     <% end %>
                 </li>
@@ -106,7 +114,7 @@
           <hr style="margin-bottom:30px;">
       <% end %>
 
-        <% if (current_user.id==@post.user_id) && (@post.status==true) && (@post.comments.present?) %>
+        <% if user_signed_in? && (current_user.id==@post.user_id) && (@post.status==true) && (@post.comments.present?) %>
             <%= form.submit 'ベストコメントを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストコメントを決めてコメント募集を終了しますか？?'} %>
         <% end %>
               <br/>

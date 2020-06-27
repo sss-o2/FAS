@@ -1,3 +1,5 @@
+<%= render 'layouts/errors', obj: @post %>
+
 <div class="d-flex align-items-center">
   <h1>投稿</h1>
   <div class="ml-auto posts_button">
@@ -9,14 +11,14 @@
         <%= f.label :title, '投稿タイトル' %>
         <%= f.text_field :title, class: 'form-control' %>
         <small id="title-tip" class="form-text text-muted">
-            タイトルを入力してください
+            タイトルを入力してください（100文字）
         </small>
     </div>
     <div class="form-group">
         <%= f.label :body, '投稿内容' %>
         <%= f.text_area :body, class: 'form-control', rows:10 %>
         <small id="content-tip" class="form-text text-muted">
-            投稿内容を入力してください。 
+            投稿内容を入力してください。 （500文字）
         </small>
     </div>
 
@@ -43,7 +45,7 @@
     </div>
     <div class="form-group">
         <%= f.label :deadline, 'コメント募集期間' %>
-        <%= f.datetime_select :deadline, {}, class: 'form-control' %>
+        <%= f.date_select :deadline, {}, class: 'form-control' %>
         <small id="content-tip" class="form-text text-muted">
             コメント募集期間を指定してください 
         </small>

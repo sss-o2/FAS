@@ -1,5 +1,9 @@
 class Comment < ApplicationRecord
   validates :best_flag, inclusion: { in: [true, false] }
+  validates :body, presence: { message: '本文を入力してください' },length: { maximum: 500 }
+  validates :post, presence: true
+  validates :user, presence: true
+
   belongs_to :user
   belongs_to :post
   has_many :post_images, dependent: :destroy, foreign_key:'comment_id'

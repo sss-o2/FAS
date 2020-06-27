@@ -15,7 +15,7 @@
     <%= form_tag posts_path, :method => 'get' do %>
     <p>
       <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
+      <%= submit_tag "タイトル検索", :name => nil %>
       <%= check_box_tag :status, checked = true,value=false %><!-- checkedでチェックがあった場合trueが:statusに送られる。value=falseで初期値チェックなし -->
       <%= label_tag :status, "募集終了も含める" %>
     </p>
@@ -64,7 +64,8 @@
               </p>
               <div class="text-right">
               <%= link_to users_profile_path(post.user_id) do %>
-                <%= attachment_image_tag post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %>
+                <%= attachment_image_tag post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+                <span style="font-size:10px;"><%= post.user.name %></span>
                 </div>
               <% end %>
               <div class="d-flex justify-content-between align-items-center">
