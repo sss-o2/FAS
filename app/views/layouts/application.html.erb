@@ -23,7 +23,7 @@
       <%= yield %>
     </div>
     <%= debug(params) if Rails.env.development? %>
-    <%= debug Inquiry.all %>
+    <%= debug User.all %>
     <%= debug Comment.all %>
     <footer class="text-muted">
       <div class="container">
