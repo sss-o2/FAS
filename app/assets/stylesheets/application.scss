@@ -28,8 +28,10 @@ body{
  }
  .jumbotron{
   background-color: white;
-  background:url(top5.jpg) center no-repeat;
-	background-size: cover;
+  background-image: image-url("top5.jpg");
+  background-position: center;
+  background-repeat: unset;
+  background-size: cover;
 }
 .bg-color{
 	background:rgba(255,255,255,0.5);
