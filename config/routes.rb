@@ -28,7 +28,6 @@ Rails.application.routes.draw do
     patch ":id/profile/update", :to => "profiles#update", as: 'update_profile'
   end
 
-  # namespaseした方が良くないか
   get "inquiry_mailer/new", :to => "inquiry_mailer#new", as: 'new_inquiry_mailer'
   get "inquiry_mailer/confirm",:to => "inquiry_mailer#confirm",as: 'confirm_inquiry_mailer'
   get "inquiry_mailer/done",:to => "inquiry_mailer#done",as: 'done_inquiry_mailer'
