@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :posts do
     post "select_best_comment", :to => "posts#select_best_comment", as: 'select_best_comment'
     resources :comments do
-      resource :favorites, only: [:create, :destroy]
+      #resource :favorites, only: [:create, :destroy]
+      get "favorites/create", :to => "favorites#create", as: 'create_favorite'
+      get "favorites/destroy", :to => "favorites#destroy", as: 'destroy_favorite'
       resources :post_comments, only: [:create, :destroy]
     end
   end
