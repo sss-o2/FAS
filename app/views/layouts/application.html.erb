@@ -22,10 +22,6 @@
       <p id="notice"><%= notice %></p>  
       <%= yield %>
     </div>
-    <%= debug(params) if Rails.env.development? %>
-    <%= debug User.all %>
-    <%= debug Comment.all %>
-    
     <%= render partial: 'layouts/footer' %>
     
   </body>
