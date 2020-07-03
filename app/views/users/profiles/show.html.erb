@@ -22,7 +22,7 @@
             <% end %>
             <p>自己紹介<br>
             <% if @profile.introduce? %>
-              <p><%= @profile.introduce %></p>
+              <p><%= Rinku.auto_link(simple_format(@profile.introduce), :all, 'target="_blank"').html_safe %></p>
             <% else %>
               <p>未設定</p><!-- 表示確認ようなので後で削除 -->
             <% end %>
@@ -36,7 +36,7 @@
 
             <p>店舗サイト</p>
             <% if @profile.hp_url? %>
-              <p><%= link_to @profile.hp_url,@profile.hp_url %></p>
+              <p><%= raw Rinku.auto_link(simple_format(@profile.hp_url), :all, 'target="_blank"') %></p>
             <% else %>
               <p>未設定</p>
             <% end %>

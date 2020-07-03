@@ -24,7 +24,7 @@
   </div>
   <div class="card-body">
       <p class="card-text">
-        <%= @post.body %>
+        <%= Rinku.auto_link(simple_format(@post.body), :all, 'target="_blank"').html_safe %>
       </p>
 
       <% if @post.post_images.present? %>
@@ -65,7 +65,7 @@
       </div>
       <div class="col-md-10 text-left">
         <div class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
-        <%= comment.body %>
+        <%= Rinku.auto_link(simple_format(comment.body), :all, 'target="_blank"').html_safe %>
       </div>
     </div>
     </p>

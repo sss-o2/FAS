@@ -72,6 +72,7 @@ gem 'rake', '< 11.0'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'dotenv-rails'
 gem 'kaminari','~> 1.2.1'
+gem 'rinku'
 # group :production do
 #   gem 'mysql2'
 # end
