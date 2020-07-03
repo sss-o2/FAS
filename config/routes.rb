@@ -24,12 +24,12 @@ Rails.application.routes.draw do
   end
 
   namespace :users do
-    post ":id/contact",:to => "profiles#contact",as: 'contact'
     get ":id/profile", :to => "profiles#show", as: 'profile'
     get ":id/profile/edit", :to => "profiles#edit", as: 'edit_profile'
     patch ":id/profile/update", :to => "profiles#update", as: 'update_profile'
   end
 
+  # namespaceにしたい
   get "inquiry_mailer/new", :to => "inquiry_mailer#new", as: 'new_inquiry_mailer'
   get "inquiry_mailer/confirm",:to => "inquiry_mailer#confirm",as: 'confirm_inquiry_mailer'
   get "inquiry_mailer/done",:to => "inquiry_mailer#done",as: 'done_inquiry_mailer'

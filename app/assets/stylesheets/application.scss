@@ -45,6 +45,36 @@ body{
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+/* ページネーション関係 */
 .pagination {
   justify-content: center;
 }
+.pagination>li>a {          
+  border: none;     /*枠線をなくす*/
+  color: #696969;   /*文字の色を変える*/
+  border-radius: 50%;
+}
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {     
+  background: #93c9ff;     /*背景の色を変える*/
+  border-radius: 50%;     /*角を丸くする*/
+}
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {        
+  border-radius: 50%; /*角を丸くする*/
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-bottom-right-radius: 50%;
+  border-top-right-radius: 50%;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-bottom-left-radius: 50%;
+  border-top-left-radius: 50%;
+}
+.pagination{
+	margin:0px;
+}
+/* ページネーション関係終了 */

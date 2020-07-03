@@ -1,11 +1,4 @@
 class Users::ProfilesController < ApplicationController
-  def contact
-    @title = params[:title]
-    @message=params[:message]
-    InquiryMailer.test_mail(@title,@message).deliver
-    redirect_to action: :show,notice: 'メール送信しました'
-  end
-
   def show
     @profile = Profile.find(params[:id])
     @user=User.find(@profile.user_id)
@@ -13,7 +6,7 @@ class Users::ProfilesController < ApplicationController
     @bc_num=Comment.where(best_flag: true).where(user_id: @user.id).count
     @fa_num=Favorite.where(user_id: @user.id).count
 
-    @user_posts=Post.where(user_id: @user.id)
+    @user_posts=Post.where(user_id: @user.id).page(params[:page]).per(5)
     #binding.pry
   end
 

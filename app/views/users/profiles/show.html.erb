@@ -66,8 +66,9 @@
               <i class="far fa-comment" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %>
               <br><%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
             <hr/>
-        <% end %>
+          <% end %>
         </p>
+        <%= paginate @user_posts %>
       </div>
     </div>
  </div>
