@@ -11,7 +11,8 @@
 </section>
 
  <div class="album py-5 bg-light">
-    <div class="container">
+  <div class="container">
+    
     <%= form_tag posts_path, :method => 'get' do %>
     <p>
       <%= text_field_tag :search, params[:search] %>
@@ -20,16 +21,17 @@
       <%= label_tag :status, "募集終了も含める" %>
     </p>
     <% end %>
-  <div class="d-flex align-items-center">
-    <div class="ml-auto posts_button">
-        <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
-        <% if user_signed_in? %>
-         <%= link_to "投稿", new_post_path, class: 'btn btn-outline-info' %>
-        <% else %>
-         <%= link_to "投稿", new_user_session_path, class: 'btn btn-outline-info' %>
-        <% end %>
+
+    <div class="d-flex align-items-center">
+      <div class="ml-auto posts_button">
+          <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
+          <% if user_signed_in? %>
+          <%= link_to "投稿", new_post_path, class: 'btn btn-outline-info' %>
+          <% else %>
+          <%= link_to "投稿", new_user_session_path, class: 'btn btn-outline-info' %>
+          <% end %>
+      </div>
     </div>
-  </div>
 
    <div class="album py-5 bg-light">
     <div class="container">
@@ -62,12 +64,14 @@
                   <br>
                   <div class="post_body"><%= post.body %></div>
               </p>
+              
               <div class="text-right">
               <%= link_to users_profile_path(post.user_id) do %>
                 <%= attachment_image_tag post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
                 <span style="font-size:10px;"><%= post.user.name %></span>
                 </div>
               <% end %>
+              
               <div class="d-flex justify-content-between align-items-center">
                 <small class="text-muted"><i class="far fa-comment" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %></small>
                 <small class="text-muted">投稿：<%= post.created_at.strftime("%Y-%m-%d") %></small>
@@ -78,5 +82,6 @@
         </div>
       <% end %>
       </div>
+      <%= paginate @posts %>
     </div>
   </div>
