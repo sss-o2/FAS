@@ -2,9 +2,16 @@ class Users::ProfilesController < ApplicationController
   def show
     @profile = Profile.find(params[:id])
     @user=User.find(@profile.user_id)
-    # bc_numはベストコメントもらった数
-    @bc_num=Comment.where(best_flag: true).where(user_id: @user.id).count
-    @fa_num=Favorite.where(user_id: @user.id).count
+
+    @best_comments=Comment.where(best_flag: true).where(user_id: @user.id)
+    # いいねした数用
+    @to_favorites=Favorite.where(user_id: @user.id)
+
+    user_comments=Comment.where(user_id: @user.id)
+    @count=0
+    user_comments.each do |comment|
+      @count+= Favorite.where(comment_id: comment.id).count
+    end
 
     @user_posts=Post.where(user_id: @user.id).page(params[:page]).per(5)
     #binding.pry
@@ -13,7 +20,6 @@ class Users::ProfilesController < ApplicationController
   def edit
     @profile = Profile.find(params[:id])
     @user=User.find(@profile.user_id)
-    @bc_num=Comment.where(best_flag: true).where(user_id: @user.id).count
     # binding.pry
   end
 
