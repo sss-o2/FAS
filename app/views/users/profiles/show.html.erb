@@ -28,7 +28,8 @@
             <% end %>
             </p>
             <!-- 横並びにしてアイコン表示にしたい -->
-            <br><i class="fas fa-crown" aria-hidden="true"></i>ベストコメント数：<%= @best_comments.count %>
+            <br><i class="far fa-comment" aria-hidden="true"></i> <%= @user.comments.count %>
+            <br><i class="fas fa-crown" aria-hidden="true"></i> <%= @best_comments.count %>
             <br><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいねもらった数：<%= @count %>
             <br><i class="far fa-heart" aria-hidden="true" style="color: red;"></i>いいねした数：<%= @to_favorites.count %>
 
@@ -54,21 +55,9 @@
   <div class="col-md-8">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">投稿一覧（全<%= @user_posts.count %>件）</h4>
-        <p class="card-text">
-          <% @user_posts.each do |post| %>
-            <%= render 'posts/tag_list', tag_list: post.tag_list %><br>
-            <span class="font-weight-bold"><%= link_to post.title,post_path(post.id) %></span>
-            <% if post.status==false %>
-              <span style="color:red">（募集終了）</span><br>
-            <% end %>
-              <p class="post_body text-muted"><%= post.body %></p>
-              <i class="far fa-comment" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %>
-              <br><%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
-            <hr/>
-          <% end %>
-        </p>
-        <%= paginate @user_posts %>
+        <!--<%= render 'users/profiles/post_lists', user_posts: @user_posts,user_posts_count: @user_posts_count %>-->
+        <!--<%= render 'users/profiles/comment_lists', user_favorite_comments: @user_favorit_comments,user_favorite_comments_count:@user_favorit_comments_count %>-->
+        <%= render 'users/profiles/best_comment_lists', user_best_comments: @user_best_comments,user_best_comments_count:@user_best_comments_count %>
       </div>
     </div>
  </div>

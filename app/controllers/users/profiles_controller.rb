@@ -7,6 +7,7 @@ class Users::ProfilesController < ApplicationController
     # いいねした数用
     @to_favorites=Favorite.where(user_id: @user.id)
 
+    # いいねされた数用 後で消すかも
     user_comments=Comment.where(user_id: @user.id)
     @count=0
     user_comments.each do |comment|
@@ -14,7 +15,12 @@ class Users::ProfilesController < ApplicationController
     end
 
     @user_posts=Post.where(user_id: @user.id).page(params[:page]).per(5)
-    #binding.pry
+    @user_posts_count=Post.where(user_id: @user.id).count
+    @user_favorit_comments=@user.favorite_comments.page(params[:page]).per(5)
+    @user_favorit_comments_count=@user.favorite_comments.count
+    @user_best_comments=@user.comments.where(best_flag: true).page(params[:page]).per(5)
+    @user_best_comments_count=@user.comments.where(best_flag: true).count
+
   end
 
   def edit

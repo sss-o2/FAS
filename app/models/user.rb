@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one :profile
   has_many :favorites, dependent: :destroy
+  has_many :favorite_comments, through: :favorites, source: 'comment'
   
   accepts_nested_attributes_for :profile
   before_create :build_default_profile
