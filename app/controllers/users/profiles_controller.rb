@@ -16,8 +16,10 @@ class Users::ProfilesController < ApplicationController
 
     @user_posts=Post.where(user_id: @user.id).page(params[:page]).per(5)
     @user_posts_count=Post.where(user_id: @user.id).count
-    @user_favorit_comments=@user.favorite_comments.page(params[:page]).per(5)
-    @user_favorit_comments_count=@user.favorite_comments.count
+    
+    @user_favorit_comments=@user.favorite_comments.includes(:user).page(params[:page]).per(5)
+    @user_favorit_comments_count=@user.favorite_comments.includes(:user).count
+    
     @user_best_comments=@user.comments.where(best_flag: true).page(params[:page]).per(5)
     @user_best_comments_count=@user.comments.where(best_flag: true).count
 

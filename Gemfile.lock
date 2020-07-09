@@ -186,7 +186,7 @@ GEM
     nested_form (0.3.2)
     netrc (0.11.0)
     nio4r (2.5.2)
-    nokogiri (1.10.9)
+    nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     parallel (1.19.2)
@@ -393,7 +393,6 @@ DEPENDENCIES
   devise
   dotenv-rails
   jbuilder (~> 2.7)
-  jquery-rails
   kaminari (~> 1.2.1)
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
