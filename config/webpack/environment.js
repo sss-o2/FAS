@@ -7,8 +7,8 @@ environment.plugins.prepend('VueLoaderPlugin', new VueLoaderPlugin())
 environment.loaders.prepend('vue', vue)
 environment.plugins.prepend('Provide',
     new webpack.ProvidePlugin({
-        $: 'jquery/dist/jquery',
-        jQuery: 'jquery/dist/jquery',
+        $: 'jquery/src/jquery',
+        jQuery: 'jquery/src/jquery',
         Rails: ['@rails/ujs']
     })
 )

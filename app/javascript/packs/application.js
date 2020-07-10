@@ -6,7 +6,7 @@
 import Rails from '@rails/ujs';
 Rails.start();
 
-require("@Rails/ujs").start()
+require("@rails/ujs").start()
 require("turbolinks").start()
 require("@Rails/activestorage").start()
 require('jquery')
