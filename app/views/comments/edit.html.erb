@@ -33,3 +33,4 @@
         投稿する前に投稿内容を見直してください!
     </small>
 <% end %>
+<%= link_to 'コメントを削除', post_comment_delete_path(@post.id,@comment.id),method: :patch, class: 'btn btn-outline-info',data: {confirm: 'コメントを削除しますか?'} %>

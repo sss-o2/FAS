@@ -1,10 +1,6 @@
 class CommentsController < ApplicationController
   before_action :deadline_post_deleate, only: [:create]
 
-  def index
-   # 不要？
-  end
-
   def new
     @comment = Comment.new
     @post = Post.find(params[:post_id])
@@ -46,16 +42,13 @@ class CommentsController < ApplicationController
     else
       render :new
     end
-
-    
   end
 
-  def show
-    # 不要？
-  end
-
-  def destroy
-    # 「このコメントは削除されました」を表示
+  def delete
+    @comment = Comment.find(params[:comment_id])
+    @post = Post.find(params[:post_id])
+    @comment.update(delete_flag: true)
+    redirect_to post_path(@post),notice: '編集しました'
   end
 
   private

@@ -1,5 +1,5 @@
 class Users::ProfilesController < ApplicationController
-  before_action :set_user_id, only: [:show, :update, :posts_show, :favorite_comments_show, :best_comments_show]
+  before_action :set_user_id, only: [:show, :edit, :update,:posts_show, :favorite_comments_show, :best_comments_show]
 
   def show
     # binding.pry
