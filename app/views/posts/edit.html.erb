@@ -56,6 +56,5 @@
     <small id="submit-tip" class="form-text text-muted">
         投稿する前に投稿内容を見直してください!
     </small>
-
-    
 <% end %>
+<%= link_to "投稿を削除", post_path(@post.id), method: :delete, class: 'btn btn-outline-info',"data-confirm" => "本当に削除しますか？" %>

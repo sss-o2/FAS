@@ -7,7 +7,7 @@
         <span style="color:red">（募集終了）</span><br>
       <% end %>
         <p class="text_overflow text-muted"><%= post.body %></p>
-        <i class="far fa-comment" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %>
+        <i class="far fa-comment-dots" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %>
         <br><%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
       <hr/>
     <% end %>

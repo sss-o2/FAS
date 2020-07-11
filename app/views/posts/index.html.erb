@@ -73,7 +73,7 @@
               <% end %>
               
               <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted"><i class="far fa-comment" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %></small>
+                <small class="text-muted"><i class="far fa-comment-dots" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %></small>
                 <small class="text-muted">投稿：<%= post.created_at.strftime("%Y-%m-%d") %></small>
               </div>
               <%= render 'posts/tag_list', tag_list: post.tag_list %>

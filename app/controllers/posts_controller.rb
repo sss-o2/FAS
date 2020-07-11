@@ -46,7 +46,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    # 不要な気がする。statusで削除するやん
+    post = Post.find(params[:id])
+    post.destroy
+    redirect_to posts_path
   end
 
   def search

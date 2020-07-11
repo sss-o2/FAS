@@ -20,9 +20,9 @@ Rails.application.routes.draw do
     :sessions => 'users/sessions'   
   } 
   
-  devise_scope :user do
-    get "user/:id", :to => "users/registrations#detail"
-  end
+  # devise_scope :user do
+  #   get "user/:id", :to => "users/registrations#detail"
+  # end
 
   namespace :users do
     get ":id/profile", :to => "profiles#show", as: 'profile'
