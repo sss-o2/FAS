@@ -70,7 +70,7 @@
     </div>
     </p>
 
-    <% if (current_user.id==@post.user_id) && (@post.status==true) %>
+    <% if (user_signed_in?)&&(current_user.id==@post.user_id) && (@post.status==true) %>
       <%= form.radio_button :best_comment, comment.id %>
       <%= form.label :best_comment, "ベストコメントに選ぶ", {value: comment.id, style: "display: inline-block;"} %>
     <% end %>
@@ -85,7 +85,7 @@
               
             <!-- いいね機能 -->
             <p>
-            <% if current_user.id!=comment.user_id %>
+            <% if (user_signed_in?)&&(current_user.id!=comment.user_id) %>
             
               <% if comment.favorited_by?(current_user) %>
                 <li class="favorite-list">
@@ -109,7 +109,7 @@
             <% end %>
             </p>
             
-            <% if current_user.id==comment.user_id %>
+            <% if (user_signed_in?) && (current_user.id==comment.user_id) %>
               <%= link_to "編集", edit_post_comment_path(comment), class: 'btn btn-outline-info' %>
             <% end %>
           <hr style="margin-bottom:30px;">

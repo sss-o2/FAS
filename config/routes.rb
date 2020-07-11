@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     get ":id/profile", :to => "profiles#show", as: 'profile'
     get ":id/profile/edit", :to => "profiles#edit", as: 'edit_profile'
     patch ":id/profile/update", :to => "profiles#update", as: 'update_profile'
+    get ":id/profile/posts_show", :to => "profiles#posts_show", as: 'posts_show'
+    get ":id/profile/favorite_comments_show", :to => "profiles#favorite_comments_show", as: 'favorite_comments_show'
+    get ":id/profile/best_comments_show", :to => "profiles#best_comments_show", as: 'best_comments_show'
   end
 
   # namespaceにしたい

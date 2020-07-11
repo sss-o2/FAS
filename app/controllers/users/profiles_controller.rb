@@ -1,33 +1,27 @@
 class Users::ProfilesController < ApplicationController
-  def show
-    @profile = Profile.find(params[:id])
-    @user=User.find(@profile.user_id)
+  before_action :set_user_id, only: [:show, :update, :posts_show, :favorite_comments_show, :best_comments_show]
 
+  def show
+    # binding.pry
     @best_comments=Comment.where(best_flag: true).where(user_id: @user.id)
     # いいねした数用
     @to_favorites=Favorite.where(user_id: @user.id)
 
     # いいねされた数用 後で消すかも
     user_comments=Comment.where(user_id: @user.id)
-    @count=0
+    @get_favorite_count=0
     user_comments.each do |comment|
-      @count+= Favorite.where(comment_id: comment.id).count
+      @get_favorite_count+= Favorite.where(comment_id: comment.id).count
     end
-
-    @user_posts=Post.where(user_id: @user.id).page(params[:page]).per(5)
+    @user_posts=Post.where(user_id: @user.id).page(params[:page]).per(3)
     @user_posts_count=Post.where(user_id: @user.id).count
-    
-    @user_favorit_comments=@user.favorite_comments.includes(:user).page(params[:page]).per(5)
-    @user_favorit_comments_count=@user.favorite_comments.includes(:user).count
-    
-    @user_best_comments=@user.comments.where(best_flag: true).page(params[:page]).per(5)
+
+    @user_favorite_comments_count=@user.favorite_comments.includes(:user).count
     @user_best_comments_count=@user.comments.where(best_flag: true).count
 
   end
 
   def edit
-    @profile = Profile.find(params[:id])
-    @user=User.find(@profile.user_id)
     # binding.pry
   end
 
@@ -38,6 +32,26 @@ class Users::ProfilesController < ApplicationController
     else
       render :show
     end
+  end
+
+  def posts_show
+    @user_posts=Post.where(user_id: @user.id).page(params[:page]).per(3)
+    @user_posts_count=Post.where(user_id: @user.id).count
+  end
+
+  def favorite_comments_show
+    @user_favorite_comments=@user.favorite_comments.includes(:user).page(params[:page]).per(5)
+    @user_favorite_comments_count=@user.favorite_comments.includes(:user).count
+  end
+
+  def best_comments_show
+    @user_best_comments=@user.comments.where(best_flag: true).page(params[:page]).per(5)
+    @user_best_comments_count=@user.comments.where(best_flag: true).count
+  end
+
+  def set_user_id
+    @profile = Profile.find(params[:id])
+    @user=User.find(@profile.user_id)
   end
 
   def profile_params
