@@ -1,3 +1,8 @@
+
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
+<script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
+<script src="//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js" type="text/javascript"></script>
+
 <div class="d-flex align-items-center">
     <div class="ml-auto posts_button">
         <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
@@ -45,9 +50,42 @@
               <p>店舗住所</p>
               <% if @profile.address? %>
                 <p><%= @profile.address %></p>
+
+                <!-- 店舗地図表示 -->
+                <style>
+                  #map { height: 300px;}
+                  </style>
+                  <div id="map"></div>
+                  <script>
+                    function initMap() {
+                      var latlng = new google.maps.LatLng(
+                        <%= @profile.latitude %>,
+                        <%= @profile.longitude %>
+                        );
+                      var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 12,
+                        center: latlng
+                      });
+                      var marker = new google.maps.Marker({
+                        position: latlng,
+                        map: map
+                      });
+                      var infowindow = new google.maps.InfoWindow({
+                        content: '<a href="https://www.google.com/maps/search/?api=1&query=<%= @profile.latitude %>,<%= @profile.longitude %>" target="_blank" rel="noopener noreferrer">google mapで開く</a>',
+                      });
+                      infowindow.open(map, marker);
+                      google.maps.event.addListener(infowindow, "closeclick", function() {
+                        google.maps.event.addListenerOnce(marker, "click", function(event) {
+                          infowindow.open(map, marker);
+                        });
+                      });
+                    }
+                    initMap();
+                  </script>
               <% else %>
                 <p>未設定</p>
               <% end %>
+
       </div>
     </div>
   </aside>

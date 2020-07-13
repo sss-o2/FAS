@@ -72,6 +72,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'dotenv-rails'
 gem 'kaminari','~> 1.2.1'
 gem 'rinku'
+gem "gmaps4rails"
+gem "geocoder"
 # group :production do
 #   gem 'mysql2'
 # end

@@ -6,15 +6,13 @@
 import Rails from '@rails/ujs';
 Rails.start();
 
-require("@rails/ujs").start()
 require("turbolinks").start()
-require("@Rails/activestorage").start()
+require("@rails/activestorage").start()
 require('jquery')
-require('jquery_ujs').start()
-require('bootstrap-daterangepicker').start()
-require("custom/custom").start()
-require("bootstrap").start()
 require("channels")
+require("bootstrap").start()
+
+import 'bootstrap'
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
