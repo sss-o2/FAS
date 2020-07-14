@@ -10,7 +10,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require('jquery')
 require("channels")
-require("bootstrap").start()
+require("bootstrap")
 
 import 'bootstrap'
 
