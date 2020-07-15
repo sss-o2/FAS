@@ -14,6 +14,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile
   before_create :build_default_profile
 
+  validates :name, presence: true
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
