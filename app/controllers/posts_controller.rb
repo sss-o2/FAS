@@ -4,9 +4,9 @@ class PostsController < ApplicationController
 
   def index
     #@posts = Post.all
-    @posts = Post.search(params[:search],params[:status]).page(params[:page]).per(6)
+    @posts = Post.search(params[:search],params[:status]).page(params[:page]).per(3)
     if params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}")
+      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).per(3)
     end
   end
 
