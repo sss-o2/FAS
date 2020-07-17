@@ -28,7 +28,6 @@ class InquiryMailerController < ApplicationController
   end
 
   def done
-    # backが押されなかったら送信して、送りましたページ(doneページ)表示するやで、てことはget？
     @inquiry = Inquiry.new(inquiry_params)
     if params[:back]
       render :action => 'new'
