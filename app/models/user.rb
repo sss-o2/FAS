@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers:[:google_oauth2]
   
+  before_create :build_default_profile
+    
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_one :profile
@@ -12,7 +14,6 @@ class User < ApplicationRecord
   has_many :favorite_comments, through: :favorites, source: 'comment'
   
   accepts_nested_attributes_for :profile
-  before_create :build_default_profile
 
   validates :name, presence: true
 
@@ -22,6 +23,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
+
   
   private
   def build_default_profile

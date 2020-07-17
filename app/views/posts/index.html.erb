@@ -42,7 +42,6 @@
       <% @posts.each do |post| %>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <%# <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap"> %>
             <% post.post_images.each do |image| %>
               <% if image.present? %>
                 <%= attachment_image_tag image,:image,size: '300x300', fallback: "no_image.jpg", class: "card-img-top" %>
@@ -58,7 +57,9 @@
             <div class="card-body">
               
               <p class="card-text">
-                  <%= link_to post.title,post_path(post.id) %>
+                  <div class="text_overflow">
+                    <%= link_to post.title,post_path(post.id),class: "title_overflow" %>
+                  </div>
                   <% if post.status==false %>
                     <span style="color:red">（募集終了）</span>
                   <% end %>
@@ -68,7 +69,11 @@
               
               <div class="text-right">
               <%= link_to users_profile_path(post.user_id) do %>
+              <% if post.user.profile.icon_image.present? %>
                 <%= attachment_image_tag post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+              <% else %>
+                <%= image_tag 'no_image.jpg', class: "rounded-circle pull-left profile-thumb", size: '40x40' %><br>
+              <% end %>
                 <span style="font-size:10px;"><%= post.user.name %></span>
                 </div>
               <% end %>

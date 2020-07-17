@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root to: 'posts#index'
-  #get 'home/top'
+  get 'posts/index'
   get 'home/about'
 
   resources :posts do
