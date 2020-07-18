@@ -74,6 +74,9 @@ gem 'kaminari','~> 1.2.1'
 gem 'rinku'
 gem "geocoder"
 gem 'omniauth-google-oauth2'
+gem 'rails-i18n', '~> 6.0'
+gem 'devise-i18n'
+gem 'devise-bootstrap-views', '~> 1.0'
 # group :production do
 #   gem 'mysql2'
 # end
