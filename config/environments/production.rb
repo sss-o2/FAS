@@ -39,7 +39,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # mailer setting
-  config.action_mailer.default_url_options = { host: 'http://18.218.226.214/'}
+  config.action_mailer.default_url_options = { host: 'http://fas-site.work/'}
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
