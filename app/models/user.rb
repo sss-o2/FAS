@@ -18,13 +18,23 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name
+    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["info"]["name"]
+      user.email = auth["info"]["email"]
     end
   end
 
+  def self.new_with_session(params, session)
+    if session["devise.user_attributes"]
+      new(session["devise.user_attributes"]) do |user|
+        user.attributes = params
+      end
+    else
+      super
+    end
+  end
   
   private
   def build_default_profile
