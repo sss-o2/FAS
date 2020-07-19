@@ -20,13 +20,20 @@
   max-width: 576px;
   padding: 2rem;
 }
-
-.alert-notice {
-  @extend .alert-info;
+ .container-forgot_password {
+  @extend .container-fluid;
+  max-width: 576px;
+  padding: 2rem;
 }
 
-.alert-alert {
+#notice {
+  @extend .alert-info;
+  display: inline-block;
+}
+
+#alert {
   @extend .alert-danger;
+  display: inline-block;
 }
 
 body{
@@ -37,6 +44,10 @@ body{
   max-width: 330px;
   padding: 15px;
   margin: auto;
+}
+.google_button{
+  width:15%;
+  height:3%;
 }
  .favorite-list{
    list-style: none;
