@@ -12,7 +12,7 @@
     <%= f.label :name,{class: 'sr-only'} %><br />
     <%= f.text_field :name,:placeholder => "name", autofocus: true,class: "form-control" %>
   </div>
-
+  <% if @user.uid.nil? %>
   <div class="field">
     <%= f.label :password,{class: 'sr-only'} %>
     <% if @minimum_password_length %>
@@ -25,6 +25,7 @@
     <%= f.label :password_confirmation,{class: 'sr-only'} %><br />
     <%= f.password_field :password_confirmation,:placeholder => "confirm password", autocomplete: "new-password",class: "form-control" %>
   </div>
+  <% end %>
 
   <div class="actions">
     <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Sign up</button>
