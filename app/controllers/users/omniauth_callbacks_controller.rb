@@ -36,6 +36,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"].except("extra"))
 
     if @user.persisted?
+        flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
         sign_in_and_redirect @user
     else
         session["devise.user_attributes"] = @user.attributes
@@ -44,6 +45,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
+    flash[:notice] ='認証できませんでした'
     redirect_to root_path
   end
 
