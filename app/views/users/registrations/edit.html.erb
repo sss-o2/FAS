@@ -1,11 +1,13 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<!--<h2>Edit <%= resource_name.to_s.humanize %></h2>-->
+<div class="text-center">
+<h3>ログイン情報編集ページ</h3>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put,class: "form-signin_up" }) do |f| %>
+  <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email,{class: 'sr-only'} %><br />
+    <%= f.email_field :email, autofocus: true, :placeholder => "email",autocomplete: "email",class: "form-control" %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -13,17 +15,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.label :name,{class: 'sr-only'} %><br />
+    <%= f.text_field :name,:placeholder => "name", autofocus: true,class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "更新",class: "btn btn-lg btn-primary btn-block submit_button" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<!--<h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
+-->
 <%= link_to "Back", :back %>
+</div>

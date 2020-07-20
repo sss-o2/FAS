@@ -19,6 +19,7 @@
   @extend .container-fluid;
   max-width: 576px;
   padding: 2rem;
+  text-align:center;
 }
  .container-forgot_password {
   @extend .container-fluid;
@@ -41,13 +42,27 @@ body{
 }
 .form-signin_up {
   width: 100%;
-  max-width: 330px;
+  max-width: 360px;
   padding: 15px;
   margin: auto;
+}
+.error_ul{
+  padding-left: 0;
+}
+.alert_box{
+  padding: 2px;
+}
+.alert-dismissible .close {
+  padding: 0;
+  position: relative;
 }
 .google_button{
   width:15%;
   height:3%;
+}
+
+.submit_button{
+  margin-top:30px
 }
  .favorite-list{
    list-style: none;
