@@ -15,7 +15,7 @@ class User < ApplicationRecord
   
   accepts_nested_attributes_for :profile
 
-  validates :name, presence: true
+  validates :name, :uniqueness => true, :presence => true
 
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|

@@ -13,15 +13,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # # POST /resource
   def create
-    #uid=session["devise.user_attributes"]["uid"]
-    logger.debug "zzzzzzzzzzzzzzzzzzzzzzzcreateメソッド"
     if params[:user][:password].nil?
       generated_password = Devise.friendly_token.first(8)
       uid=session["devise.user_attributes"]["uid"]
       provider=session["devise.user_attributes"]["provider"]
-      user = User.create!(email: params[:user][:email], password: generated_password, name: params[:user][:name],uid: uid, provider: provider)
-      flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
-      sign_in_and_redirect user
+      user = User.new(email: params[:user][:email], password: generated_password, name: params[:user][:name],uid: uid, provider: provider)
+      if user.save
+        flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
+        sign_in_and_redirect user
+      else
+        super
+      end
     else
       super
     end
@@ -51,7 +53,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # # protected
+  protected
+
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
 
   # # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
