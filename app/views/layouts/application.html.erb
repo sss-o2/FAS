@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
     <title>FAS</title>
     <%= csrf_meta_tags %>
@@ -16,21 +16,36 @@
   </head>
 
   <body>
-    <div class="container">
-      <% unless user_signed_in? %>
-        <%= render partial: 'layouts/header' %>
-      <% else %>
-        <%= render partial: '/users/header' %>
-      <% end %>
+  <div id="wrapper">
+      <div class="container mt-5">
+        <% unless user_signed_in? %>
+          <%= render partial: 'layouts/header' %>
+        <% else %>
+          <%= render partial: '/users/header' %>
+        <% end %>
+      </div>
 
-      <p id="notice"><%= notice %></p> 
-      <p id="alert"><%= alert %></p> 
+        <% unless current_page?('/')%>
+         <div class="container alert_notice">
+          <div id="notice"><%= notice %></div> 
+          <div id="alert"><%= alert %></div>
+         </div>
+        <% end %>
+
       <%= yield %>
-    </div>
-    <%= render partial: 'layouts/footer' %>
-    <%= debug(params) if Rails.env.development? %>
-    <%= debug User.all %>
-    <%= debug session["devise.user_attributes"] %>
-    
+     
+      <%= render partial: 'layouts/footer' %>
+      <!--<%= debug(params) if Rails.env.development? %>
+      <%= debug User.all %>
+      <%= debug session["devise.user_attributes"] %>-->
+     
+  </div>
+
+<span id="back">
+      <a href="#">
+        <i class="fas fa-arrow-circle-up fa-3x top_arrow"></i>
+      </a>
+</span>
+
   </body>
 </html>

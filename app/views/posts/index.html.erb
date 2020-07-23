@@ -1,16 +1,19 @@
 <section class="jumbotron text-center">
-  <div class="bg-mask">
-    <div class="container">
-      <h1 class="jumbotron-heading">FAS</h1>
-      <p class="lead text-muted">要件に合う服をみんなに教えてもらうサイト</p>
+  <div class="title_text">
+      <h1 class="jumbotron-heading section_title">FAS</h1>
+      <!--<div class="lead">Fashion Advice Site</div>-->
       <p>
         <!--<%= link_to "About", home_about_path(test_id: 1,test2_id: 2) %>-->
-        <%= link_to "About", home_about_path %>
+        <%= link_to "Fashion Advise site", home_about_path %>
       </p>
-    </div>
   </div>
 </section>
 
+  <div id="notice"><%= notice %></div> 
+  <div id="alert"><%= alert %></div>
+
+<div class="container">
+<div class="section_title">aaaa</div>
  <div class="album py-5 bg-light">
   <div class="container">
     
@@ -90,4 +93,7 @@
       </div>
       <%= paginate @posts %>
     </div>
+  </div>
+  </div>
+  </div>
   </div>

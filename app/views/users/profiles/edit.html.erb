@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_for(@profile,url: users_update_profile_path(@profile)) do |f| %>
 
   <!-- devise関係は後で調べる -->
@@ -37,3 +38,4 @@
   
   <div class="al-c"><%= f.submit 'プロフィール編集を完了する', class: 'btn btn-primary' %></div>
 <% end %>
+</div>

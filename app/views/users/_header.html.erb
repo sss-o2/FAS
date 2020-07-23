@@ -1,21 +1,23 @@
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="/">FAS</a>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand logo" href="/">FAS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="collapse navbar-collapse main_nav" id="navbarCollapse">
       <div class="navbar-nav mr-auto">
       </div>
       <ul class="navbar-nav navbar-right">
         <li class="nav-item active">
           <%= link_to "Home", root_path, class: 'nav-link' %>
         </li>
+        <div class="account">
        <%= link_to users_profile_path(current_user.id), class: 'nav-link' do %>
               <div><i class="fas fa-user-circle" aria-hidden="true"></i>
               <span style="font-size:10px; margin-top:0px;padding-top:0px"><%= current_user.name %></span>
               </div>
           <% end %>
         </li>
+        </div>
         <li class="nav-item">
           <a class="nav-link" href="/inquiry_mailer/new">Contact</a>
         </li>

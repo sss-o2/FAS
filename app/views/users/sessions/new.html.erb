@@ -1,7 +1,9 @@
+<div class="container">
 <div class="text-center">
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name),html: { class: "form-signin_up" }) do |f| %>
   <h2 class="h3 mb-3 font-weight-normal">Log in</h2>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <%= render "users/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :email,{class: 'sr-only'} %><br />
@@ -26,4 +28,5 @@
 <% end %>
 
 <%= render "users/shared/links" %>
+</div>
 </div>

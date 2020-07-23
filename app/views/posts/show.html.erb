@@ -1,3 +1,4 @@
+<div class="container">
 <div class="d-flex align-items-center mt-4 mb-4">
     <div class="ml-auto posts_button">
         <% if user_signed_in? && (current_user.id==@post.user_id) && (@post.status==true) %>
@@ -137,4 +138,5 @@
         <% end %>
               <br/>
   <% end %>
+</div>
 </div>
