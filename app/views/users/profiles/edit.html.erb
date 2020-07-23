@@ -2,19 +2,22 @@
 <%= form_for(@profile,url: users_update_profile_path(@profile)) do |f| %>
 
   <!-- devise関係は後で調べる -->
-  <div class="form-group">
-    <%= f.label :name, 'ユーザー名' %>
-    <%= @user.name %>
-    
+ <div class="form-inline account_border">
+ <div class="account_titile">アカウント情報</div>
+  <div class="form-group mr-5">
+    <%= f.label :name, 'Name',class:'account_text' %>
+    <div class="account_data"><%= @user.name %></div>
   </div>
   
   <div class="form-group">
-    <%= f.label :email, 'メールアドレス' %>
-    <%= @user.email %>
-    
+    <%= f.label :email, 'Email',class:'account_text' %>
+    <div class="account_data"><%= @user.email %></div>
   </div>
+ </div>
 
-  <div class="form-group">
+  アカウント情報編集は<%= link_to "こちら", edit_user_registration_path %>
+
+  <div class="form-group mt-3">
       <%= attachment_image_tag @profile, :icon_image, :fill, 200, 200, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb" %>
     <br/>
     <%= f.attachment_field :icon_image, placeholder: "プロフィール画像", class: "user-edit-form" %>

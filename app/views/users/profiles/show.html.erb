@@ -1,12 +1,4 @@
 <div class="container">
-<div class="d-flex align-items-center">
-    <div class="ml-auto posts_button">
-        <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
-        <% if user_signed_in? && (@user.id==current_user.id) %>
-         <%= link_to "編集", users_edit_profile_path(current_user.id), class: 'btn btn-outline-info' %>
-        <% end %>
-    </div>
-</div>
 
 <div class="row">
   <aside class="col-md-4">
@@ -18,9 +10,25 @@
             <%= attachment_image_tag @profile, :icon_image, :fill, 200, 200, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %>
             <br><%= @user.name %>
             
+            <!-- email表示とユーザー情報編集ボタン -->
             <% if user_signed_in? && (@user.id==current_user.id) %>
               <p>登録email:<%= @user.email %></span></p>
+              <!--<%= link_to "アカウント情報を編集", edit_user_registration_path, class: 'btn btn-outline-info' %>-->
+
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle edit_drop"
+                            type="button" id="dropdownMenu1" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                      ユーザー情報編集
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <%= link_to "アカウント", edit_user_registration_path, class: 'dropdown-item' %>
+                      <%= link_to "プロフィール", users_edit_profile_path(current_user.id), class: 'dropdown-item' %>
+                    </div>
+                  </div>
+
             <% end %>
+
             <p>自己紹介<br>
             <% if @profile.introduce? %>
               <p><%= Rinku.auto_link(simple_format(@profile.introduce), :all, 'target="_blank"').html_safe %></p>

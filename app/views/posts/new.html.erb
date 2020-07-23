@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group">
-        <%= f.label :tag_list, 'カテゴリ' %>
+        <i class="fas fa-tags"></i><%= f.label :tag_list, 'カテゴリ' %>
         <%= f.text_field :tag_list,value: @post.tag_list.join(','), class: 'form-control' %>
         <small id="content-tip" class="form-text text-muted">
             カテゴリ名をコンマで区切って入力してください。（例：Tシャツ,色）

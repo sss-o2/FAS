@@ -1697,27 +1697,30 @@ body{
   border: none;     /*枠線をなくす*/
   color: #696969;   /*文字の色を変える*/
   border-radius: 50%;
+  margin:4px;
 }
 /* 表示しているページ番号のデザイン */
-.pagination>.active>a {     
-  background: #93c9ff;     /*背景の色を変える*/
-  border-radius: 50%;     /*角を丸くする*/
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #937c6f;
+  border-color: #007bff;
 }
 /*ホバー時のデザイン*/
 .pagination>li>a:hover {        
   border-radius: 50%; /*角を丸くする*/
 }
-.pagination > li:last-child > a,
-.pagination > li:last-child > span {
-  border-bottom-right-radius: 50%;
-  border-top-right-radius: 50%;
+.page-item:last-child .page-link {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
-.pagination > li:first-child > a,
-.pagination > li:first-child > span {
+.page-item:first-child .page-link {
   margin-left: 0;
-  border-bottom-left-radius: 50%;
-  border-top-left-radius: 50%;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
+
+.page-
 .pagination{
 	margin:0px;
 }
@@ -1942,4 +1945,58 @@ ul.social-network li {
 
 .top_arrow{
   color:gray;
+}
+.search_box{
+  background-color: transparent;
+  border: 1px solid #e3e3e3;
+  border-radius: 30px;
+  color: #2c2c2c;
+  height: auto;
+  line-height: normal;
+  font-size: .8571em;
+  transition: color .3s ease-in-out,border-color .3s ease-in-out,background-color .3s ease-in-out;
+  box-shadow: none;
+}
+
+.edit_drop{
+  background-color: #937c6f;
+  border-color: #937c6f;
+}
+
+.account_border{
+  border-bottom: solid 1px;
+  color:#937c6f;
+}
+.account_text{
+  color: black;
+  padding: 3px;
+  margin: 3px;
+  font-family: 'Lucida', serif;
+}
+.account_titile{
+  background-color: #937c6f;
+  color: white;
+  padding: 3px;
+  margin: 3px;
+}
+
+.account_data{
+  color:#937c6f;
+}
+
+.fa-tags{
+  color: gray;
+}
+
+.fa-comment-alt{
+  color: gray;
+  margin-right: 1px;
+}
+
+.full_title{
+  display: inline;
+  position: relative;
+  color: inherit;
+  border-bottom: solid 1px #ffa07f;
+  transition: all 200ms ease;
 }
