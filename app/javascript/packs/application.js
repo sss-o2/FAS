@@ -12,7 +12,7 @@ require('jquery')
 require("channels")
 require("bootstrap")
 
-require('js/script')
+require('js_file/script')
 
 import 'bootstrap'
 

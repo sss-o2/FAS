@@ -1630,14 +1630,12 @@ section
 #notice {
   @extend .alert-info;
   display: inline-block;
-  position: absolute;
   margin-top: 10px;
 }
 
 #alert {
   @extend .alert-danger;
   display: inline-block;
-  position: absolute;
   margin-top: 10px;
 }
 
@@ -2012,4 +2010,7 @@ ul.social-network li {
   border-left: solid 2px #937c6f;
   outline: none;
   padding-left: 20px;
+}
+.profile_name{
+	text-align: center;
 }
