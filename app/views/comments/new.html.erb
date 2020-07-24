@@ -1,30 +1,37 @@
+<div class="container mt-4">
 <%= render 'layouts/errors', obj: @comment %>
 
 <h1>返信</h1>
-<div class="d-flex align-items-center">
-  <div class="ml-auto posts_button">
-  </div>
-  <div>
-  ユーザーアイコン 
-    <%= @post.user.name %>
-    <br/>
-    <%= @post.body %>
+<!--<div class="d-flex align-items-center">-->
+  <div class="row">
+    <div class="col-3 text-right">
+        <%= link_to users_profile_path(@post.user_id) do %>
+          <% if @post.user.profile.icon_image.present? %>
+            <%= attachment_image_tag @post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+          <% else %>
+            <%= image_tag 'no_image.jpg', class: "rounded-circle pull-left profile-thumb", size: '40x40' %><br>
+          <% end %>
+          <span style="font-size:10px;"><%= @post.user.name %></span>
+        <% end %>
+         <br>
+    </div>
+    <div class="col-8 comment_quote">
+      <%= @post.body %>
+    </div>
   </div>
 
-</div>
 <%= form_for [@post,@comment] do |f| %>
     <div class="form-group">
         <%= f.label :body, '投稿内容' %>
         <br/>
-        ユーザーアイコン<br/>
-        <%= current_user.name %><br/>
+        <!--<%= current_user.name %><br/>-->
         <%= f.text_area :body, class: 'form-control', rows:10 %>
         <small id="content-tip" class="form-text text-muted">
             投稿内容を入力してください。 
         </small>
     </div>
     
-    <div class="form-group row">
+    <div class="form-group">
         <% if @comment.post_images.present? %>
             <% @comment.post_images.each do |image| %>
             <%= attachment_image_tag image, :image, :fill, 200, 200 %>
@@ -42,3 +49,4 @@
         投稿する前に投稿内容を見直してください!
     </small>
 <% end %>
+</div>

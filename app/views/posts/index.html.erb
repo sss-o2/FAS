@@ -4,7 +4,6 @@
       <!--<div class="lead">Fashion Advice Site</div>-->
       <p>
         <!--<%= link_to "About", home_about_path(test_id: 1,test2_id: 2) %>-->
-        <%= link_to "Fashion Advise site", home_about_path %>
         <div class="full_title">Fashion Advise site</div>
       </p>
   </div>
@@ -53,18 +52,12 @@
       <% @posts.each do |post| %>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-            <% post.post_images.each do |image| %>
-              <% if image.present? %>
-                <%= attachment_image_tag image,:image,size: '300x300', fallback: "no_image.jpg", class: "card-img-top" %>
-              <% else %>
-                <%= image_tag 'no_image.jpg', class: "card-img-top", size: '80x80' %>
-              <% end %>
-             <% break %>
-            <% end %>
             <% if post.post_images.present? %>
-            <% else %>
-              <%= image_tag('no_image.jpg', class: "card-img-top",size: '300x300') %>
+                <%= attachment_image_tag post.post_images.first, :image, size: '300x300', fallback: "no_image.jpg", class: "card-img-top" %>
+              <% else %>
+                <%= image_tag('no_photo.jpg', class: "card-img-top",size: '300x300') %>
             <% end %>
+
             <div class="card-body">
               
               <p class="card-text">
