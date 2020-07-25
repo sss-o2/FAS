@@ -1672,7 +1672,7 @@ body{
  .jumbotron{
   background-color: white;
   background-image: image-url("top5.jpg");
-  background-position: center;
+  background-position: center center;
   background-repeat: unset;
   background-size: cover;
   border-radius: 0;
@@ -1939,7 +1939,7 @@ ul.social-network li {
   border-top: 1px solid #8a8a8a;
 }
 
-#back {
+#top {
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -1998,7 +1998,7 @@ ul.social-network li {
 .full_title{
   display: inline;
   position: relative;
-  color: inherit;
+  color: white;
   border-bottom: solid 1px #ffa07f;
   transition: all 200ms ease;
 }
@@ -2013,4 +2013,93 @@ ul.social-network li {
 }
 .profile_name{
 	text-align: center;
+	display: inline-block;
+}
+.posts_card{
+	padding-bottom: 5px;
+}
+.post_title{
+	color:#1f14148a;
+	font-size: 16px;
+}
+.post_index_body{
+	color:gray;
+	margin-top:2px;
+}
+.post_index_tag{
+	margin: 1rem 0;
+}
+.post_index_time{
+	font-size: 3px;
+	text-align: right;
+}
+.card_comment_icon{
+	font-size:12px;
+}
+.post_data{
+	border-top: 1px solid #ddd;
+	padding-top: 3px;
+}
+.badge-primary {
+	color: #fff;
+	background-color: #49505752;
+}
+.post_index_image{
+	position: relative;
+}
+.ended{
+	/*width: 50px;
+	height: 50px;*/
+	color: #ffffff;
+	background: rgba(35, 35, 35, 0.63);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-family: 'Lucida', serif;
+	padding: 2px;
+}
+.post_ended_tag{
+	background-color: #ffa07f;
+	color: white;
+	display: inline-flex;
+	padding:2px;
+}
+
+.contact_page
+{
+	font-family: 'Lucida', serif;
+}
+.contact_name{
+	display: inline-block;
+}
+.contact_email
+{
+  display: inline-block;
+}
+/*.contact_row{
+	text-align: center;
+}*/
+.post_show_time{
+	font-size:12px;
+	color:gray;
+	justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.show_card{
+	border:none;
+}
+.border-wide{
+	border-bottom: 2px solid rgba(0, 0, 0, 0.125);
+}
+.post_show_body{
+	font-size: 16px;
+}
+.font_bk{
+	color:black;
 }
