@@ -21,22 +21,24 @@
 ***********/
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Lato:wght@300&display=swap');
+
 @font-face
 {
 	font-family: 'Lucida';
-	src: url('../fonts/lucida_bright_regular.ttf')  format('truetype');
+	src: url('fonts/lucida_bright_regular.ttf')  format('truetype');
 }
 @font-face
 {
 	font-family: 'Lucida';
-	src: url('../fonts/lucida_bright_demi.ttf')  format('truetype');
+	src: url('fonts/lucida_bright_demi.ttf')  format('truetype');
 	font-weight: 700;
 }
 @font-face
 {
 	font-family: 'Beyond';
-	src: url('../fonts/beyond_the_mountains.otf')  format('opentype'),
-		 url('../fonts/beyond_the_mountains.ttf')  format('truetype');
+	src: url('fonts/beyond_the_mountains.otf')  format('opentype'),
+		 url('fonts/beyond_the_mountains.ttf')  format('truetype');
 }
 
 /*********************************
@@ -138,19 +140,8 @@ h1, h2, h3, h4, h5, h6
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
-h1::selection, 
-h2::selection, 
-h3::selection, 
-h4::selection, 
-h5::selection, 
-h6::selection
-{
 	
-}
-.form-control
-{
-	/*color: #db5246;*/
-}
+
 section
 {
 	display: block;
@@ -239,10 +230,6 @@ section
 .nopadding
 {
 	padding: 0px !important;
-}
-.section_title_container
-{
-
 }
 .section_subtitle
 {
@@ -1639,9 +1626,7 @@ section
   margin-top: 10px;
 }
 
-body{
-  /*margin-top: 65px;*/
-}
+
 .form-signin_up {
   width: 100%;
   max-width: 360px;
@@ -2102,4 +2087,89 @@ ul.social-network li {
 }
 .font_bk{
 	color:black;
+}
+.font_size5{
+ font-size: 5px;
+}
+.review_form_button {
+	width: 179px;
+	height: 46px;
+	border: none;
+	outline: none;
+	background: #937c6f;
+	color: #FFFFFF;
+	font-size: 12px;
+	letter-spacing: 0.2em;
+	cursor: pointer;
+	margin-top: 18px;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.review_form_button:hover
+{
+	background: #e0e3e4;
+	color: #232323;
+}
+.review_back_button {
+	width: 80px;
+	height: 46px;
+	border: none;
+	outline: none;
+	background: #6f6a67;
+	color: #FFFFFF;
+	font-size: 12px;
+	letter-spacing: 0.2em;
+	cursor: pointer;
+	margin-top: 18px;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+}
+.review_back_button:hover
+{
+	background: #e0e3e4;
+	color: #232323;
+}
+.about_img{
+	position: relative;
+  z-index: 1;
+}
+.about_img::before{
+	content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #ccc;
+}
+.about_title{
+	font-family: 'Cormorant Garamond', serif;
+	font-size: 45px;
+}
+
+.about_sec{
+	background: rgba(35,35,35, 0.95);
+	display: inline-block;
+	color:white;
+	font-size: 30px;
+	font-family: 'Open Sans', sans-serif;
+	padding: 0 4px;
+	
+}
+/*
+.about_sec::first-letter {
+	color:#6f6a67;
+
+}*/
+.ftext-bold::first-letter {
+	font-weight:bold;
+}
+.about_sentence{
+	letter-spacing: 0.25rem;
 }

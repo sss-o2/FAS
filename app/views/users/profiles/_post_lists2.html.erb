@@ -4,7 +4,9 @@
       <%= render 'posts/tag_list', tag_list: post.tag_list %><br>
       <span class="font-weight-bold"><%= link_to post.title,post_path(post.id) %></span>
       <% if post.status==false %>
-        <span style="color:red">（募集終了）</span><br>
+        <div class="post_ended_tag font_size5">
+              CLOSE
+        </div><br>
       <% end %>
         <p class="text_overflow text-muted"><%= post.body %></p>
         <i class="far fa-comment-dots" aria-hidden="true" style="color: gray;"></i> <%= post.comments.count %>

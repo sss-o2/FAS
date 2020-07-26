@@ -13,7 +13,7 @@ class Users::ProfilesController < ApplicationController
     user_comments.each do |comment|
       @get_favorite_count += Favorite.where(comment_id: comment.id).count
     end
-    @user_posts = Post.where(user_id: @user.id).page(params[:page]).per(3)
+    @user_posts = Post.where(user_id: @user.id).page(params[:page]).per(5)
     @user_posts_count = Post.where(user_id: @user.id).count
 
     @user_favorite_comments_count = @user.favorite_comments.includes(:user).count
@@ -35,7 +35,7 @@ class Users::ProfilesController < ApplicationController
   end
 
   def posts_show
-    @user_posts = Post.where(user_id: @user.id).page(params[:page]).per(3)
+    @user_posts = Post.where(user_id: @user.id).page(params[:page]).per(5)
     @user_posts_count = Post.where(user_id: @user.id).count
   end
 

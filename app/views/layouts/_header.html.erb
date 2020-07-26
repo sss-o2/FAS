@@ -7,13 +7,16 @@
     <div class="navbar-nav mr-auto">
     </div>
     <ul class="navbar-nav navbar-right">
-      <li class="nav-item active">
+      <li class="nav-item <%= 'active' if current_page?(root_path) %>">
         <%= link_to "Home", root_path, class: 'nav-link' %>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/inquiry_mailer/new">Contact</a>
+      <li class="nav-item <%= 'active' if current_page?(home_about_path) %>">
+        <%= link_to "About", home_about_path, class: 'nav-link' %>
       </li>
-      <li class="nav-item">
+      <li class="nav-item <%= 'active' if current_page?(new_inquiry_mailer_path) %>">
+        <%= link_to "Contact", new_inquiry_mailer_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item <%= 'active' if current_page?(new_user_session_path) %>">
         <%= link_to "Sign In", new_user_session_path, class: 'nav-link' %>
       </li>
     </ul>
