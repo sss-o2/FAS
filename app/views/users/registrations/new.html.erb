@@ -11,14 +11,14 @@
   </div>
 
   <div class="field">
-    <%= f.label :name,{class: 'sr-only'} %><br />
+    <%= f.label :name,{class: 'sr-only'} %><em>名前：4〜20文字</em><br />
     <%= f.text_field :name,:placeholder => "name", autofocus: true,class: "form-control" %>
   </div>
   <% if @user.uid.nil? %>
   <div class="field">
     <%= f.label :password,{class: 'sr-only'} %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>パスワード：<%= @minimum_password_length %> 文字以上</em>
     <% end %><br />
     <%= f.password_field :password, :placeholder => "password",autocomplete: "new-password",class: "form-control" %>
   </div>
@@ -34,7 +34,7 @@
   </div>
 <% end %>
 
-  <p><%= link_to "利用規約", home_terms_path %>と<%= link_to "プライバシーポリシー", home_privacy_path %>をご確認ください。<br>会員登録された場合、これらに同意したものと見なします</p>
+  <p><%= link_to "利用規約", home_terms_path %>と<%= link_to "プライバシーポリシー", home_privacy_path %>をご確認ください。<br>会員登録された場合、これらに同意したものといたします</p>
 
 <%= render "users/shared/links" %>
 </div>

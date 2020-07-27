@@ -15,7 +15,10 @@ class User < ApplicationRecord
   
   accepts_nested_attributes_for :profile
 
-  validates :name, :uniqueness => true, :presence => true
+  validates :name, 
+    uniqueness: { case_sensitive: :false },
+    length: { minimum: 4, maximum: 20 }, 
+    :presence => true
 
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
