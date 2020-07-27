@@ -1,4 +1,4 @@
-$(function(){
+document.addEventListener('turbolinks:load', function() {
   var pagetop = $('#top a');
   // ボタン非表示
   pagetop.hide();
