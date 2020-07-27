@@ -26,9 +26,9 @@
       <div class="ml-auto posts_button">
           <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
           <% if user_signed_in? %>
-          <%= link_to "投稿", new_post_path, class: 'btn btn-outline-info' %>
+          <%= link_to "投稿", new_post_path, class: 'form_button' %>
           <% else %>
-          <%= link_to "投稿", new_user_session_path, class: 'btn btn-outline-info' %>
+          <%= link_to "投稿", new_user_session_path, class: 'form_button' %>
           <% end %>
       </div>
     </div>

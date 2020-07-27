@@ -2222,3 +2222,30 @@ ul.social-network li {
 .mw960{
 	max-width: 960px;
 }
+.form_button {
+	border: none;
+	outline: none;
+	background: #937c6f;
+	color: #FFFFFF;
+	font-size: 17px;
+	letter-spacing: 0.2em;
+	cursor: pointer;
+	margin-top: 18px;
+	-webkit-transition: all 200ms ease;
+	-moz-transition: all 200ms ease;
+	-ms-transition: all 200ms ease;
+	-o-transition: all 200ms ease;
+	transition: all 200ms ease;
+	padding: 10px 40px;
+	display:inline-block;
+}
+.form_button:hover
+{
+	background: #e0e3e4;
+	color: #232323;
+	border-bottom:none;
+	display:inline-block;
+}
+.form_button a:hover{
+	text-decoration: none;
+}

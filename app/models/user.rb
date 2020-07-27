@@ -38,6 +38,14 @@ class User < ApplicationRecord
       super
     end
   end
+
+  def password_required?
+    if uid.present?
+      false
+    else
+      super
+    end      
+  end
   
   private
   def build_default_profile

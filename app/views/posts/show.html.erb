@@ -38,6 +38,7 @@
       <% end %>
     
     <% if @post.status == true %>
+      <div class="text-right">
       <% if user_signed_in? %>
         <% unless (current_user.id==@post.user_id) %>
             <%= link_to "返信する", new_post_comment_path(@post.id), class: 'btn btn-outline-info' %>
@@ -45,6 +46,7 @@
       <% else %>
         <%= link_to "ログインして返信する", new_user_session_path, class: 'btn btn-outline-info' %>
       <% end %>
+      </div>
     <% end %>
 
       <div class="mt-3">
@@ -144,7 +146,9 @@
               </p>
               
               <% if (user_signed_in?) && (current_user.id==comment.user_id) %>
-                <%= link_to "編集", edit_post_comment_path(@post.id,comment.id), class: 'btn btn-outline-info' %>
+                <div class="text-right">
+                  <%= link_to "編集", edit_post_comment_path(@post.id,comment.id), class: 'btn btn-outline-info' %>
+                </div>
               <% end %>
             <hr style="margin-bottom:30px;">
         <% else %>
