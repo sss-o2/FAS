@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root to: 'posts#index'
   get 'posts/index'
-  get 'home/about'
+  namespace :home do
+    get "about", as: 'about'
+    get "terms", as: 'terms'
+    get "privacy", as: 'privacy'
+  end
 
   resources :posts do
     post "select_best_comment", :to => "posts#select_best_comment", as: 'select_best_comment'
