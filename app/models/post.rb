@@ -1,10 +1,11 @@
 class Post < ApplicationRecord
   acts_as_taggable
-  validates :title, presence: { message: 'タイトルを入力してください' },length: { maximum: 100 }
-  validates :body, presence: { message: '本文を入力してください' },length: { maximum: 500 }
-  validates :deadline, presence: { message: '募集期間を入力してください' }
+  validates :title, presence: true,length: { maximum: 100 }
+  validates :body, presence: true,length: { maximum: 500 }
+  validates :deadline, presence: true
   validates :status, inclusion: { in: [true, false] }
   validates :user, presence: true
+  validate :deadline_cannot_be_in_the_past
 
   belongs_to :user
   has_many :post_images, dependent: :destroy, foreign_key:'post_id'
@@ -36,6 +37,12 @@ class Post < ApplicationRecord
     post.update(best_comment_id: best_comment_id,status: false)
     comment=Comment.find(best_comment_id)
     comment.update(best_flag: true)
+  end
+
+  def deadline_cannot_be_in_the_past
+    if deadline.present? && deadline < Date.today
+      errors.add(:deadline, ": 過去の日付は使用できません")
+    end
   end
 
 end

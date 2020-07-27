@@ -1,7 +1,7 @@
 class Comment < ApplicationRecord
   validates :best_flag, inclusion: { in: [true, false] }
   validates :delete_flag, inclusion: { in: [true, false] }
-  validates :body, presence: { message: '本文を入力してください' },length: { maximum: 500 }
+  validates :body, presence: true, length: { maximum: 500 }
   validates :post, presence: true
   validates :user, presence: true
 

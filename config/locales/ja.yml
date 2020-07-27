@@ -6,3 +6,14 @@ ja:
       previous: <i class="fas fa-angle-left"></i>
       next: <i class="fas fa-angle-right"></i>
       truncate: "..."
+  activerecord:
+    models:
+      post: 投稿
+      comment: コメント
+    attributes:
+      post:
+        title: タイトル
+        body: 本文
+        deadline: 募集期間
+      comment:
+        body: 本文
