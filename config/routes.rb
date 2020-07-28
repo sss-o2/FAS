@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root to: 'posts#index'
   get 'posts/index'
+  
   namespace :home do
     get "about", as: 'about'
     get "terms", as: 'terms'

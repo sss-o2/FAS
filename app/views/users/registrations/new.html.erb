@@ -11,16 +11,18 @@
   </div>
 
   <div class="field">
-    <%= f.label :name,{class: 'sr-only'} %><em>名前：4〜20文字</em><br />
-    <%= f.text_field :name,:placeholder => "name", autofocus: true,class: "form-control" %>
+    <%= f.label :name,{class: 'sr-only'} %><em><% @max_name_length %></em><br />
+    <%= f.text_field :name,:placeholder => "name（４〜20文字）", autofocus: true,class: "form-control" %>
   </div>
+  <% binding.pry %>
   <% if @user.uid.nil? %>
   <div class="field">
-    <%= f.label :password,{class: 'sr-only'} %>
+    <%= f.label :password,{class: 'sr-only'} %><br/>
     <% if @minimum_password_length %>
-    <em>パスワード：<%= @minimum_password_length %> 文字以上</em>
-    <% end %><br />
-    <%= f.password_field :password, :placeholder => "password",autocomplete: "new-password",class: "form-control" %>
+      <%= f.password_field :password, :placeholder => "password（#{@minimum_password_length}文字以上）",autocomplete: "new-password",class: "form-control" %>
+    <% else %>
+      <%= f.password_field :password, :placeholder => "password",autocomplete: "new-password",class: "form-control" %>
+    <% end %>
   </div>
 
   <div class="field">
