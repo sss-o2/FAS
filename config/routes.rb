@@ -13,9 +13,6 @@ Rails.application.routes.draw do
     post "select_best_comment", :to => "posts#select_best_comment", as: 'select_best_comment'
     resources :comments,only: [:new, :create, :edit, :update] do
       patch "delete", :to => "comments#delete", as: 'delete'
-      #resource :favorites, only: [:create, :destroy]
-      # get "favorites/create", :to => "favorites#create", as: 'create_favorite'
-      # get "favorites/destroy", :to => "favorites#destroy", as: 'destroy_favorite'
       resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
@@ -26,10 +23,6 @@ Rails.application.routes.draw do
     :sessions => 'users/sessions',
     :omniauth_callbacks => 'users/omniauth_callbacks'
   } 
-  
-  # devise_scope :user do
-  #   get "user/:id", :to => "users/registrations#detail"
-  # end
 
   namespace :users do
     get ":id/profile", :to => "profiles#show", as: 'profile'

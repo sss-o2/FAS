@@ -1,107 +1,104 @@
 <div class="container mt-4">
-
 <div class="row">
+<!-- ユーザー情報部分（ページ左） -->
   <aside class="col-md-4">
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"></h3>
-      </div>
       <div class="panel-body al-c">
-           <div class="profile_name">
-            <%= attachment_image_tag @profile, :icon_image, :fill, 200, 200, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
-            <div class="mt-2 font-weight-bold"><%= @user.name %></div>
-           </div>
-            
-            <!-- email表示とユーザー情報編集ボタン -->
-            <% if user_signed_in? && (@user.id==current_user.id) %>
-              <p>登録email:<%= @user.email %></span></p>
-              <!--<%= link_to "アカウント情報を編集", edit_user_registration_path, class: 'btn btn-outline-info' %>-->
-
-                  <div class="dropdown mb-3">
-                    <button class="btn btn-secondary dropdown-toggle edit_drop"
-                            type="button" id="dropdownMenu1" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                      ユーザー情報編集
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                      <%= link_to "アカウント", edit_user_registration_path, class: 'dropdown-item' %>
-                      <%= link_to "プロフィール", users_edit_profile_path(current_user.id), class: 'dropdown-item' %>
-                    </div>
-                  </div>
-
-            <% end %>
-
-            <% if @profile.introduce? %>
-              <div class="mb-1">
-                <%= Rinku.auto_link(simple_format(@profile.introduce), :all, 'target="_blank"').html_safe %>
-              </div>
-            <% end %>
-    
-            <!-- 横並びにしてアイコン表示にしたい -->
-            <div>
-              <br><i class="far fa-comment" aria-hidden="true"></i> <%= link_to @user_posts_count,users_posts_show_path(@user), remote: true %>
-              <br><i class="fas fa-crown" aria-hidden="true"></i> <%= link_to @user_best_comments_count,users_best_comments_show_path(@user), remote: true %>
-              <br><i class="far fa-heart" aria-hidden="true" style="color: red;"></i>いいねした数：<%= link_to @to_favorites.count,users_favorite_comments_show_path(@user), remote: true %>
-              <br><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいねもらった数：<%= @get_favorite_count %>
+        <div class="profile_name">
+          <%= attachment_image_tag @profile, :icon_image, :fill, 200, 200, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+          <div class="mt-2 font-weight-bold"><%= @user.name %></div>
+        </div>
+        
+        <!-- email表示とユーザー情報編集ボタン（current_user時） -->
+        <% if user_signed_in? && (@user.id==current_user.id) %>
+          <p>登録email:<%= @user.email %></span></p>
+          <div class="dropdown mb-3">
+            <button class="btn btn-secondary dropdown-toggle edit_drop"
+                    type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+              ユーザー情報編集
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <%= link_to "アカウント", edit_user_registration_path, class: 'dropdown-item' %>
+              <%= link_to "プロフィール", users_edit_profile_path(current_user.id), class: 'dropdown-item' %>
             </div>
-            <hr/>
+          </div>
+        <% end %>
 
-            <p>店舗サイト</p>
-            <% if @profile.hp_url? %>
-              <p><%= raw Rinku.auto_link(simple_format(@profile.hp_url), :all, 'target="_blank"') %></p>
-            <% else %>
-              <p>未設定</p>
-            <% end %>
+        <% if @profile.introduce? %>
+          <div class="mb-1">
+            <%= Rinku.auto_link(simple_format(@profile.introduce), :all, 'target="_blank"').html_safe %>
+          </div>
+        <% end %>
 
-              <p>店舗住所</p>
-              <% if @profile.address? %>
-                <p><%= @profile.address %></p>
+        <!-- 投稿、ベストコメント、いいね数表示（横並びにしてアイコン表示にしたい） -->
+        <div>
+          <br><i class="far fa-comment" aria-hidden="true"></i> <%= link_to @user_posts_count,users_posts_show_path(@user), remote: true %>
+          <br><i class="fas fa-crown" aria-hidden="true"></i> <%= link_to @user_best_comments_count,users_best_comments_show_path(@user), remote: true %>
+          <br><i class="far fa-heart" aria-hidden="true" style="color: red;"></i>いいねした数：<%= link_to @to_favorites.count,users_favorite_comments_show_path(@user), remote: true %>
+          <br><i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>いいねもらった数：<%= @get_favorite_count %>
+        </div>
+        <hr/>
 
-                <!-- 店舗地図表示 -->
-                <style>
-                  #map { height: 300px;}
-                  </style>
-                  <div id="map"></div>
-                  <script>
-                    function initMap() {
-                      var latlng = new google.maps.LatLng(
-                        <%= @profile.latitude %>,
-                        <%= @profile.longitude %>
-                        );
-                      var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 12,
-                        center: latlng
-                      });
-                      var marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map
-                      });
-                      var infowindow = new google.maps.InfoWindow({
-                        content: '<a href="https://www.google.com/maps/search/?api=1&query=<%= @profile.latitude %>,<%= @profile.longitude %>" target="_blank" rel="noopener noreferrer">google mapで開く</a>',
-                      });
+        <p>店舗サイト</p>
+        <% if @profile.hp_url? %>
+          <p><%= raw Rinku.auto_link(simple_format(@profile.hp_url), :all, 'target="_blank"') %></p>
+        <% else %>
+          <p>未設定</p>
+        <% end %>
+
+        <p>店舗住所</p>
+          <% if @profile.address? %>
+            <p><%= @profile.address %></p>
+
+            <!-- 店舗地図表示 -->
+            <style>
+              #map { height: 300px;}
+              </style>
+              <div id="map"></div>
+              <script>
+                function initMap() {
+                  var latlng = new google.maps.LatLng(
+                    <%= @profile.latitude %>,
+                    <%= @profile.longitude %>
+                    );
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: latlng
+                  });
+                  var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map
+                  });
+                  var infowindow = new google.maps.InfoWindow({
+                    content: '<a href="https://www.google.com/maps/search/?api=1&query=<%= @profile.latitude %>,<%= @profile.longitude %>" target="_blank" rel="noopener noreferrer">google mapで開く</a>',
+                  });
+                  infowindow.open(map, marker);
+                  google.maps.event.addListener(infowindow, "closeclick", function() {
+                    google.maps.event.addListenerOnce(marker, "click", function(event) {
                       infowindow.open(map, marker);
-                      google.maps.event.addListener(infowindow, "closeclick", function() {
-                        google.maps.event.addListenerOnce(marker, "click", function(event) {
-                          infowindow.open(map, marker);
-                        });
-                      });
-                    }
-                    initMap();
-                  </script>
-              <% else %>
-                <p>未設定</p>
-              <% end %>
+                    });
+                  });
+                }
+                initMap();
+              </script>
+          <!-- 店舗住所未設定 -->
+          <% else %>
+            <p>未設定</p>
+          <% end %>
 
       </div>
     </div>
   </aside>
 
+<!-- 一覧部分（ページ右） -->
   <div class="col-md-8">
     <div class="card">
       <div class="card-body" id="lists">
         <%= render 'users/profiles/post_lists2', user_posts: @user_posts,user_posts_count: @user_posts_count %>
       </div>
     </div>
- </div>
+  </div>
+
 </div>
 </div>

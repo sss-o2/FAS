@@ -79,9 +79,9 @@
                   <div class="profile_name">
                     <%= link_to users_profile_path(post.user_id) do %>
                       <% if post.user.profile.icon_image.present? %>
-                        <%= attachment_image_tag post.user.profile, :icon_image, :fill, 20, 20, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+                        <%= attachment_image_tag post.user.profile, :icon_image, :fill, 20, 20, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %>
                       <% else %>
-                        <%= image_tag 'no_image.jpg', class: "rounded-circle pull-left profile-thumb", size: '20x20' %><br>
+                        <%= image_tag 'no_image.jpg', class: "rounded-circle pull-left profile-thumb", size: '20x20' %>
                       <% end %>
                       <!--<span style="font-size:10px;"><%= post.user.name %></span>-->
                     <% end %>
