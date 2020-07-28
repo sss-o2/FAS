@@ -14,8 +14,9 @@ Rails.application.routes.draw do
     resources :comments,only: [:new, :create, :edit, :update] do
       patch "delete", :to => "comments#delete", as: 'delete'
       #resource :favorites, only: [:create, :destroy]
-      get "favorites/create", :to => "favorites#create", as: 'create_favorite'
-      get "favorites/destroy", :to => "favorites#destroy", as: 'destroy_favorite'
+      # get "favorites/create", :to => "favorites#create", as: 'create_favorite'
+      # get "favorites/destroy", :to => "favorites#destroy", as: 'destroy_favorite'
+      resource :favorites, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
     end
   end
