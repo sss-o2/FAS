@@ -41,10 +41,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop-airbnb'
   gem 'pry-byebug'
-  
 end
-gem 'listen', '~> 3.2'
-gem 'bullet'
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
@@ -56,6 +53,9 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'listen', '~> 3.2'
+gem 'bullet'
 
 gem 'devise'
 gem 'rails_admin', '~> 2.0.0.beta'
@@ -77,6 +77,3 @@ gem 'omniauth-google-oauth2'
 gem 'rails-i18n', '~> 6.0'
 gem 'devise-i18n'
 gem 'devise-bootstrap-views', '~> 1.0'
-# group :production do
-#   gem 'mysql2'
-# end

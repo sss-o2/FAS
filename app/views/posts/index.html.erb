@@ -1,3 +1,4 @@
+<!-- ジャンボトロン（画像）-->
 <section class="jumbotron text-center">
   <div class="title_text">
       <div>
@@ -9,10 +10,12 @@
 
   <div id="notice"><%= notice %></div> 
   <div id="alert"><%= alert %></div>
-
+<!-- 下半分コンテナ -->
 <div class="container">
  <div class="album py-5 bg-light">
+ <!-- 下半分内容のコンテナ -->
   <div class="container">
+    <!-- 検索ボタン -->
     <%= form_tag posts_path, :method => 'get' do %>
     <p>
       <%= text_field_tag :search, params[:search] %>
@@ -23,21 +26,21 @@
     <% end %>
 
     <div class="d-flex align-items-center">
+    <!-- 投稿ボタン -->
       <div class="ml-auto posts_button">
-          <!--<a class="btn btn-outline-info" href="/posts/new" role="button">投稿</a>-->
-          <% if user_signed_in? %>
-          <%= link_to "投稿", new_post_path, class: 'form_button' %>
-          <% else %>
-          <%= link_to "投稿", new_user_session_path, class: 'form_button' %>
-          <% end %>
+        <% if user_signed_in? %>
+        <%= link_to "投稿", new_post_path, class: 'form_button' %>
+        <% else %>
+        <%= link_to "投稿", new_user_session_path, class: 'form_button' %>
+        <% end %>
       </div>
     </div>
 
    <div class="album py-5 bg-light">
     <div class="container">
-
       <div class="row">
 
+      <!-- 投稿カード一覧 -->
       <% @posts.each do |post| %>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
@@ -54,20 +57,13 @@
                     Close
                   </div>
                 <% end %>
-
             </div>
 
             <div class="card-body posts_card">
-              
               <div class="card-text">
                   <div class="text_overflow">
                     <%= link_to post.title,post_path(post.id),class: "post_title" %>
                   </div>
-                  
-                  <!--<div class="text_overflow post_index_body">
-                    <%= post.body %>
-                  </div>
-                  -->
               </div>
 
               <div class="justify-content-between align-items-center post_index_tag">
@@ -96,15 +92,16 @@
                   <small class="text-muted"><%= post.created_at.strftime("%Y-%m-%d") %>
                 - <%= post.deadline.strftime("%Y-%m-%d") %></small>
                 </div>
-
               </div>
-            
-
-          </div>
+            </div>
+         
          </div>
         </div>
       <% end %>
+      <!-- 投稿一覧ループ終了 -->
+
       </div>
+      <!-- ページネーション -->
       <%= paginate @posts %>
     </div>
    </div>

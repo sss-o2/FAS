@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
        redirect_to @post,notice: '編集しました'
     else
-      render :new
+      render :edit
     end
   end
 
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
-    redirect_to posts_path
+    redirect_to posts_path,notice: '削除しました'
   end
 
   def search

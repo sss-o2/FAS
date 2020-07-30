@@ -8,8 +8,8 @@
                 <%= comment.user.name %>
           <% end %>
         </div>
-        <div class="col-md-10 text-left">
-          <%= link_to comment.body,post_path(comment.post_id),class: "text_overflow text-muted" %>
+        <div class="col-md-10 text_overflow text-left">
+          <%= link_to comment.body,post_path(comment.post_id),class: "text-muted" %>
           <div class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
         </div>
       </div>

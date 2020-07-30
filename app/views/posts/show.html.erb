@@ -7,36 +7,33 @@
     </div>
 </div>
 
+<!-- 投稿部分 -->
 <div class="card show_card">
   <div class="card-header bg-white">
       <h3>
         <%= @post.title %>
 
-        <% if @post.status==false %>
+        <!-- コメント募集終了タグ -->
+        <% if !@post.status %>
             <div class="post_ended_tag">
               CLOSE
             </div>
         <% end %>
-
       </h3>
+      <!-- カテゴリタグ -->
       <i class="fa fa-tags" aria-hidden="true" style="color: gray;"></i><%= render 'posts/tag_list', tag_list: @post.tag_list %>
-      <!--<div style="text-align:right">
-        <%= link_to users_profile_path(@post.user_id) do %>
-                  <%= attachment_image_tag @post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
-                  <%= @post.user.name %>
-        <% end %>-->
   </div>
   <div class="card-body">
-      <p class="card-text">
-        <%= Rinku.auto_link(simple_format(@post.body), :all, 'target="_blank"').html_safe %>
-      </p>
+    <p class="card-text">
+      <%= Rinku.auto_link(simple_format(@post.body), :all, 'target="_blank"').html_safe %>
+    </p>
 
       <% if @post.post_images.present? %>
         <% @post.post_images.each do |image| %>
           <%= attachment_image_tag image, :image, :fill, 200, 200 %>
         <% end %>
       <% end %>
-    
+    <!-- 投稿がコメント募集中だったら、返信ボタン表示 -->
     <% if @post.status == true %>
       <div class="text-right">
       <% if user_signed_in? %>
@@ -74,15 +71,19 @@
 
   </div>
 </div>
+<!-- 投稿部分終了 -->
 
 <div style="margin:30px 30px;">
+<!-- コメント部分開始 -->
   <div class="border-bottom mb-3">回答<%= @comments.count %> 件</div>
   <!-- 投稿ユーザーだった場合、ベストアンサーボタンを表示しているが、複雑になるので別ページの方がいいかも-->
 
+<!-- ベストコメントフォームループ -->
   <%= form_with(model: @post,url: "#{@post.id}/select_best_comment", method: 'post', local: true) do |form| %>
+    <!-- コメントループ -->
     <% @comments.each do |comment| %>
 
-    <% if comment.delete_flag == false %>
+    <% if !comment.delete_flag %>
       <% if @post.best_comment_id==comment.id %>
           ベストコメント
           <%= image_tag 'crown.png',:size =>'60x60' %>
@@ -116,61 +117,61 @@
           <%= attachment_image_tag image, :image, :fill, 200, 200 %>
         <% end %>
       <% end %>
-    
-              <br/>
+      <br/>
                 
-              <!-- いいね機能 -->
-              <p>
-              <% if (user_signed_in?)&&(current_user.id!=comment.user_id) %>
-              
-                <% if comment.favorited_by?(current_user) %>
-                  <li class="favorite-list">
-                      <%= link_to post_comment_favorites_path(comment.post_id,comment.id), method: :delete do %>
-                      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-                      <%= comment.favorites.count %>
-                      <% end %>
-                  </li>
-                  <% else %>
-                  <li class="favorite-list">
-                      <%= link_to post_comment_favorites_path(comment.post_id,comment.id), method: :post do %>
-                      <i class="far fa-heart" aria-hidden="true" style="color: red;"></i>
-                      <%= comment.favorites.count %>
-                      <% end %>
-                  </li>
-                <% end %>
-              <% else %>
-                <li class="favorite-list">
-                  <i class="far fa-heart" aria-hidden="true" style="color: red;"></i>
-                <%= comment.favorites.count %>
+        <!-- いいね機能 -->
+      <p>
+      <% if (user_signed_in?)&&(current_user.id!=comment.user_id) %>
+      
+        <% if comment.favorited_by?(current_user) %>
+          <li class="favorite-list">
+              <%= link_to post_comment_favorites_path(comment.post_id,comment.id), method: :delete do %>
+              <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+              <%= comment.favorites.count %>
               <% end %>
-              </p>
-              
-              <% if (user_signed_in?) && (current_user.id==comment.user_id) %>
-                <div class="text-right">
-                  <%= link_to "編集", edit_post_comment_path(@post.id,comment.id), class: 'btn btn-outline-info' %>
-                </div>
+          </li>
+          <% else %>
+          <li class="favorite-list">
+              <%= link_to post_comment_favorites_path(comment.post_id,comment.id), method: :post do %>
+              <i class="far fa-heart" aria-hidden="true" style="color: red;"></i>
+              <%= comment.favorites.count %>
               <% end %>
-            <hr style="margin-bottom:30px;">
-        <% else %>
-          <div class="row">
-            <div class="col-md-2">
-              <%= link_to users_profile_path(comment.user_id) do %>
-                    <%= attachment_image_tag comment.user.profile, :icon_image, :fill, 60, 60, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
-                    <%= comment.user.name %>
-              <% end %>
-            </div>
-            <div class="col-md-8">
-              <span class="border border-danger">このコメントは削除されました。</span>
-            </div>
-            <div class="col-md-2">
-              <div class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
-            </div>
+          </li>
         <% end %>
+      <% else %>
+        <li class="favorite-list">
+          <i class="far fa-heart" aria-hidden="true" style="color: red;"></i>
+        <%= comment.favorites.count %>
       <% end %>
-
-        <% if user_signed_in? && (current_user.id==@post.user_id) && (@post.status==true) && (@post.comments.present?) %>
-            <%= form.submit 'ベストコメントを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストコメントを決めてコメント募集を終了しますか？?'} %>
+      </p>
+        
+        <% if (user_signed_in?) && (current_user.id==comment.user_id) %>
+          <div class="text-right">
+            <%= link_to "編集", edit_post_comment_path(@post.id,comment.id), class: 'btn btn-outline-info' %>
+          </div>
         <% end %>
+      <hr style="margin-bottom:30px;">
+      <!-- コメント削除されていたら、削除ページ表示 -->
+    <% else %>
+      <div class="row">
+        <div class="col-md-2">
+          <%= link_to users_profile_path(comment.user_id) do %>
+                <%= attachment_image_tag comment.user.profile, :icon_image, :fill, 60, 60, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+                <%= comment.user.name %>
+          <% end %>
+        </div>
+        <div class="col-md-8">
+          <span class="border border-danger">このコメントは削除されました。</span>
+        </div>
+        <div class="col-md-2">
+          <div class="text-muted"><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <% if user_signed_in? && (current_user.id==@post.user_id) && (@post.status==true) && (@post.comments.present?) %>
+      <%= form.submit 'ベストコメントを決定する', class: 'btn btn-info btn-block',data: {confirm: 'ベストコメントを決めてコメント募集を終了しますか？?'} %>
+    <% end %>
               <br/>
   <% end %>
 </div>

@@ -5,7 +5,6 @@ class CommentsController < ApplicationController
     @comment = Comment.new
     @post = Post.find(params[:post_id])
     @comment.post_images.build
-    #binding.pry
   end
 
   def create
@@ -18,7 +17,6 @@ class CommentsController < ApplicationController
       @comment = Comment.new(comment_params)
       @comment.user_id = current_user.id
       @comment.post_id=@post.id
-      #binding.pry
       if @comment.save
         redirect_to post_path(@post),notice: 'コメントしました'
       else
@@ -40,7 +38,7 @@ class CommentsController < ApplicationController
       # リダイレクト処理
       redirect_to post_path(@post),notice: '編集しました'
     else
-      render :new
+      render :edit
     end
   end
 

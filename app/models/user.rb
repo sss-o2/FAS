@@ -21,11 +21,12 @@ class User < ApplicationRecord
     :presence => true
 
   def self.from_omniauth(auth)
-    find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
-      user.provider = auth["provider"]
-      user.uid = auth["uid"]
-      user.name = auth["info"]["name"]
-      user.email = auth["info"]["email"]
+    find_or_initialize_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+    # find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
+        user.provider = auth["provider"]
+        user.uid = auth["uid"]
+        user.name = auth["info"]["name"]
+        user.email = auth["info"]["email"]
     end
   end
 

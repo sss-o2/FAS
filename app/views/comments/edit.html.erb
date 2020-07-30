@@ -1,16 +1,12 @@
 <div class="container">
+<%= render 'layouts/errors', obj: @comment %>
 <div class="d-flex align-items-center">
   <h1>編集</h1>
-  <div class="ml-auto posts_button">
-      <%= link_to '投稿一覧', posts_path, class: 'btn btn-outline-info' %>
-  </div>
 </div>
 <%= form_for [@post,@comment] do |f| %>
   <div class="form-group">
         <%= f.label :body, '投稿内容' %>
         <br/>
-        ユーザーアイコン<br/>
-        <%= current_user.name %><br/>
         <%= f.text_area :body, class: 'form-control', rows:10 %>
         <small id="content-tip" class="form-text text-muted">
             投稿内容を入力してください。 

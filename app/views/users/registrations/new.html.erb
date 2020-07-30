@@ -15,20 +15,20 @@
     <%= f.text_field :name,:placeholder => "name（４〜20文字）", autofocus: true,class: "form-control" %>
   </div>
   <% if @user.uid.nil? %>
-  <div class="field">
-    <%= f.label :password,{class: 'sr-only'} %><br/>
-    <% if @minimum_password_length %>
-      <%= f.password_field :password, :placeholder => "password（#{@minimum_password_length}文字以上）",autocomplete: "new-password",class: "form-control" %>
-    <% else %>
-      <%= f.password_field :password, :placeholder => "password",autocomplete: "new-password",class: "form-control" %>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation,{class: 'sr-only'} %><br />
-    <%= f.password_field :password_confirmation,:placeholder => "confirm password", autocomplete: "new-password",class: "form-control" %>
-  </div>
+      <div class="field">
+        <%= f.label :password,{class: 'sr-only'} %><br/>
+        <% if @minimum_password_length %>
+          <%= f.password_field :password, :placeholder => "password（#{@minimum_password_length}文字以上）",autocomplete: "new-password",class: "form-control" %>
+        <% else %>
+          <%= f.password_field :password, :placeholder => "password",autocomplete: "new-password",class: "form-control" %>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation,{class: 'sr-only'} %><br />
+        <%= f.password_field :password_confirmation,:placeholder => "confirm password", autocomplete: "new-password",class: "form-control" %>
+      </div>
   <% end %>
+
 
   <div class="actions">
     <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top:10px">Sign up</button>
