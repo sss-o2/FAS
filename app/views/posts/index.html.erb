@@ -20,9 +20,9 @@
     <p>
       <%= text_field_tag :search, params[:search] %>
       <%= submit_tag "タイトル検索", :name => nil %>
-      <%= check_box_tag :status, checked = true,value=false %><!-- checkedでチェックがあった場合trueが:statusに送られる。value=falseで初期値チェックなし -->
+      <%= check_box_tag :status, checked = true,value=false %>
       <%= label_tag :status, "募集終了も含める" %>
-    </p><!-- divタグに直したい -->
+    </p>
     <% end %>
 
     <div class="d-flex align-items-center">
@@ -46,11 +46,8 @@
           <div class="card mb-4 shadow-sm">
 
             <div class="post_index_image">
-              <% if post.post_images.present? %>
-                  <%= attachment_image_tag post.post_images.first, :image, size: '300x300', fallback: "no_image.jpg", class: "card-img-top" %>
-                <% else %>
-                  <%= image_tag('no_photo.jpg', class: "card-img-top",size: '300x300') %>
-              <% end %>
+              <%= attachment_image_tag(post.post_images.first, :image, :fill, 300, 300, 
+                  fallback: "no_photo.jpg", size:'300x300', class: "card-img-top") %><br>
               <!-- 募集終了タグ -->
                 <% if post.status == false %>
                   <div class="ended">
@@ -74,11 +71,8 @@
                 <div class="col-2">
                   <div class="profile_name">
                     <%= link_to users_profile_path(post.user_id) do %>
-                      <% if post.user.profile.icon_image.present? %>
-                        <%= attachment_image_tag post.user.profile, :icon_image, :fill, 20, 20, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %>
-                      <% else %>
-                        <%= image_tag 'no_image.jpg', class: "rounded-circle pull-left profile-thumb", size: '20x20' %>
-                      <% end %>
+                        <%= attachment_image_tag(post.user.profile, :icon_image, :fill, 20, 20, 
+                            fallback: "no_image.jpg", size:'20x20',class: "rounded-circle pull-left profile-thumb") %><br>
                       <!--<span style="font-size:10px;"><%= post.user.name %></span>-->
                     <% end %>
                   </div>

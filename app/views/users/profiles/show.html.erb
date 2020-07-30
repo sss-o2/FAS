@@ -5,7 +5,8 @@
     <div class="panel panel-default">
       <div class="panel-body al-c">
         <div class="profile_name">
-          <%= attachment_image_tag @profile, :icon_image, :fill, 200, 200, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
+          <%= attachment_image_tag(@profile, :icon_image, :fill, 200, 200, 
+          fallback: "no_image.jpg", size:'150x150',class: "rounded-circle pull-left profile-thumb") %><br>
           <div class="mt-2 font-weight-bold"><%= @user.name %></div>
         </div>
         
