@@ -22,7 +22,6 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     find_or_initialize_by(provider: auth["provider"], uid: auth["uid"]) do |user|
-    # find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
         user.provider = auth["provider"]
         user.uid = auth["uid"]
         user.name = auth["info"]["name"]
@@ -40,6 +39,7 @@ class User < ApplicationRecord
     end
   end
 
+  #パスワードのバリデーション実行条件(uidがあれば実行)
   def password_required?
     if uid.present?
       false
