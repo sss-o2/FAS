@@ -6,12 +6,9 @@
     <div class="col-2 text-right">
       <div class="profile_name">
         <%= link_to users_profile_path(@post.user_id) do %>
-          <% if @post.user.profile.icon_image.present? %>
-            <%= attachment_image_tag @post.user.profile, :icon_image, :fill, 40, 40, fallback: "no_image.jpg", class: "rounded-circle pull-left profile-thumb" %><br>
-          <% else %>
-            <%= image_tag 'no_image.jpg', class: "rounded-circle pull-left profile-thumb", size: '40x40' %><br>
-          <% end %>
-          <span style="font-size:10px;"><%= @post.user.name %></span>
+            <%= attachment_image_tag(@post.user.profile, :icon_image, :fill, 40, 40, 
+                fallback: "no_image.jpg", size:'40x40', class: "rounded-circle pull-left profile-thumb") %><br>
+            <span style="font-size:10px;"><%= @post.user.name %></span>
         <% end %>
          <br>
       </div>

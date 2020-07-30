@@ -49,7 +49,8 @@
         <div class="row">
           <div class="col-8 text-right">
             <%= link_to users_profile_path(@post.user_id) do %>
-              <%= attachment_image_tag(@post.user.profile, :icon_image, :fill, 60, 60, fallback: "no_image.jpg", size:'60x60',class: "rounded-circle pull-left profile-thumb") %><br>
+              <%= attachment_image_tag(@post.user.profile, :icon_image, :fill, 60, 60, 
+                  fallback: "no_image.jpg", size:'60x60',class: "rounded-circle pull-left profile-thumb") %><br>
               <%= @post.user.name %>
             <% end %>
           </div>
@@ -93,7 +94,8 @@
 
 	          <div class="profile_name">
             	<%= link_to users_profile_path(comment.user_id) do %>
-                  	<%= attachment_image_tag(comment.user.profile, :icon_image, :fill, 80, 80, fallback: "no_image.jpg", size:'80x80', class: "rounded-circle pull-left profile-thumb") %><br>
+                    <%= attachment_image_tag(comment.user.profile, :icon_image, :fill, 80, 80, 
+                      fallback: "no_image.jpg", size:'80x80', class: "rounded-circle pull-left profile-thumb") %><br>
                   	<%= comment.user.name %>
             	<% end %>
             </div>
@@ -150,7 +152,8 @@
           <div class="col-md-2 text-center">
            <div class="profile_name">
             <%= link_to users_profile_path(comment.user_id) do %>
-                  <%= attachment_image_tag(comment.user.profile, :icon_image, :fill, 80, 80, fallback: "no_image.jpg", size:'80x80',class: "rounded-circle pull-left profile-thumb") %><br>
+                  <%= attachment_image_tag(comment.user.profile, :icon_image, :fill, 80, 80, 
+                      fallback: "no_image.jpg", size:'80x80',class: "rounded-circle pull-left profile-thumb") %><br>
                   <%= comment.user.name %>
             <% end %>
            </div>
