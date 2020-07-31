@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     posts=Post.where(status: true)
     today=Date.today
     posts.each do |post|
-      #binding.pry
       if post.deadline < today
         post.update(status: false)
       end

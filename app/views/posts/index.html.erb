@@ -1,4 +1,3 @@
-<!-- ジャンボトロン（画像）-->
 <section class="jumbotron text-center">
   <div class="title_text">
       <div>
@@ -10,19 +9,21 @@
 
   <div id="notice"><%= notice %></div> 
   <div id="alert"><%= alert %></div>
-<!-- 下半分コンテナ -->
+
 <div class="container">
- <div class="album py-5 bg-light">
- <!-- 下半分内容のコンテナ -->
+ <div class="album py-3 bg-light">
   <div class="container">
-    <!-- 検索ボタン -->
-    <%= form_tag posts_path, :method => 'get' do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "タイトル検索", :name => nil %>
-      <%= check_box_tag :status, checked = true,value=false %>
-      <%= label_tag :status, "募集終了も含める" %>
-    </p>
+    <%= form_tag posts_path, class:"form-inline",:method => 'get' do %>
+      <div class="input-group">
+        <%= text_field_tag :search, params[:search], placeholder: "タイトル検索",class:"form-control mb-2 mr-sm-2" %>
+        <%= button_tag :submit ,:name => nil, id: "sbtn2" do %>
+            <i class="fas fa-search" aria-hidden="true"></i>
+        <% end %>
+      </div>
+      <div class="s_check_box">
+        <%= check_box_tag :status, checked = true,value=false,class: "ml30px" %>
+        <%= label_tag :status, "募集終了も含める" %>
+      </div>
     <% end %>
 
     <div class="d-flex align-items-center">
@@ -42,12 +43,12 @@
 
       <!-- 投稿カード一覧 -->
       <% @posts.each do |post| %>
-        <div class="col-md-4">
+        <div class="col-xs-12 col-lg-4">
           <div class="card mb-4 shadow-sm">
 
             <div class="post_index_image">
               <%= attachment_image_tag(post.post_images.first, :image, :fill, 300, 300, 
-                  fallback: "no_photo.jpg", size:'300x300', class: "card-img-top") %><br>
+                  fallback: "no_photo.jpg", size:'300x300', class: "card-img-top img-fluid") %><br>
               <!-- 募集終了タグ -->
                 <% if post.status == false %>
                   <div class="ended">

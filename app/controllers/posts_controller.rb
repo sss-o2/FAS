@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new,:edit]
 
   def index
-    #@posts = Post.all
     @posts = Post.search(params[:search],params[:status]).order('created_at DESC').page(params[:page]).per(6)
     if params[:tag_name]
       @posts = Post.tagged_with("#{params[:tag_name]}").order('created_at DESC').page(params[:page]).per(6)
@@ -42,7 +41,6 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments
-    # binding.pry
   end
 
   def destroy
@@ -67,6 +65,5 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :body,:status,:deadline,:tag_list,post_images_images: []) 
-    #tag_list を追加
   end
 end

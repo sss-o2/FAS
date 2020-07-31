@@ -2249,3 +2249,47 @@ ul.social-network li {
 .form_button a:hover{
 	text-decoration: none;
 }
+
+#form2{
+	position:relative;
+	max-width:300px;	
+	margin-bottom:20px;
+	}
+	#sbox2{
+	height:50px;
+	padding:0 10px; 
+	position:absolute; 
+	left:0;
+	top:0; 
+	border-radius:2px;
+	outline:0;
+	background:#eee;	
+	}
+	#sbtn2{
+	/*height:25px;*/
+	position:absolute;
+	left:180px;/*アイコン左右の位置調整*/
+	top:0;
+	/*background:none;*/
+	color:#666;
+	font-size:24px;
+	padding: 0 4px;
+	background-color: white;
+	border: solid 0.1px #ced4da;
+	border-top-right-radius: 0.25rem;
+	border-bottom-right-radius: 0.25rem;
+	border-left: none;
+	z-index: 10;
+	}
+	#sbtn2:hover{
+	color:#937c6f;
+	}
+	.s_check_box{
+		display: contents;
+	}
+	.input-group > .form-control:not(:last-child), .input-group > .custom-select:not(:last-child) {
+    border-radius: 0.25rem;
+	}
+	.ml30px{
+		margin-left: 30px;
+	}
