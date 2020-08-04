@@ -4,17 +4,8 @@
       <h3>Contact</h3>
       <hr />
       <div class="container mt-5">
-        <%= form_with model: @inquiry, local: true, method: :get, url: confirm_inquiry_mailer_path do |form| %>
-          <% if @inquiry.errors.any? %>
-            <div class="alert alert-danger" role="alert">
-              <h5><strong>入力内容にエラーがあります。</strong></h5>
-              <ul>
-                <% @inquiry.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
+      <%= render 'layouts/errors', obj: @inquiry %>
+      <%= form_with model: @inquiry, local: true, method: :get, url: confirm_inquiry_mailer_path do |form| %>
 
         <div class="row">
           <div class="col-6">

@@ -2,17 +2,18 @@ class Users::ProfilesController < ApplicationController
   before_action :set_user_id, only: [:show, :edit, :update,:posts_show, :favorite_comments_show, :best_comments_show]
 
   def show
-    # binding.pry
+    
     @best_comments = Comment.where(best_flag: true).where(user_id: @user.id)
     # いいねした数用
     @to_favorites = Favorite.where(user_id: @user.id)
 
-    # いいねされた数用 後で消すかも
+    # いいねされた数用
     user_comments = Comment.where(user_id: @user.id)
     @get_favorite_count = 0
     user_comments.each do |comment|
       @get_favorite_count += Favorite.where(comment_id: comment.id).count
     end
+
     @user_posts = Post.where(user_id: @user.id).page(params[:page]).per(5)
     @user_posts_count = Post.where(user_id: @user.id).count
 
@@ -22,7 +23,6 @@ class Users::ProfilesController < ApplicationController
   end
 
   def edit
-    # binding.pry
   end
 
   def update
