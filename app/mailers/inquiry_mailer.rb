@@ -22,6 +22,9 @@ class InquiryMailer < ApplicationMailer
       from: ENV['MAIL_ADDRESS'],
       to:   @inquiry.email,
       subject: '【FAS運営】お問い合わせありがとうございます'
-    )
+    )do |format|
+      format.text
+      format.html
+    end
   end
 end
