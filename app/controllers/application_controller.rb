@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     today=Date.today
     posts.each do |post|
       if post.deadline < today
-        post.update(status: false)
+        post.update_columns(status: false)
       end
     end
   end
