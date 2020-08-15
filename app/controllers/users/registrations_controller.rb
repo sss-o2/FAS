@@ -11,6 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   binding.pry
   # end
 
+  #google認証時登録はパスワード入力なし
   # # POST /resource
   def create
     if params[:user][:password].nil?
