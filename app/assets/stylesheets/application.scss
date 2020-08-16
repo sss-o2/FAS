@@ -26,19 +26,19 @@
 @font-face
 {
 	font-family: 'Lucida';
-	src: asset_url('/assets/lucida_bright_regular.ttf')  format('truetype');
+	src: font_url('lucida_bright_regular.ttf')  format('truetype');
 }
 @font-face
 {
 	font-family: 'Lucida';
-	src: asset_url('/assets/lucida_bright_demi.ttf')  format('truetype');
+	src: font_url('lucida_bright_demi.ttf')  format('truetype');
 	font-weight: 700;
 }
 @font-face
 {
 	font-family: 'Beyond';
-	src: asset_url('/assets/beyond_the_mountains.otf')  format('opentype'),
-		asset_url('/assets/beyond_the_mountains.ttf')  format('truetype');
+	src: font_url('beyond_the_mountains.otf')  format('opentype'),
+		font_url('beyond_the_mountains.ttf')  format('truetype');
 }
 
 /*********************************
