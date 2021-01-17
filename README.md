@@ -21,8 +21,5 @@
 ### 主な利用シーン
 洋服選びに困っているが、直接店舗に行けない、行きづらい
 
-## 設計書
-https://docs.google.com/spreadsheets/d/1Qi3vEOI7vizS_H-cQCQ3zfjK9f1iqDpvsjfW3w7M2s0/edit?usp=sharing
-
 ### 機能一覧
 https://docs.google.com/spreadsheets/d/1ofhM5Ej0iVO3qqpLx2xMshZ5OiNPYQM8KfqVKo925uE/edit?usp=sharing
